@@ -1,0 +1,22 @@
+{
+  "name": "proyecto_energym",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js",
+    "css": "npx @tailwindcss/cli -i ./views/css/config.css -o ./views/css/app.css --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.0.17",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "fullcalendar": "^6.1.17",
+    "mongoose": "^8.13.1",
+    "nodemon": "^3.1.9",
+    "tailwindcss": "^4.0.17"
+  }
+}

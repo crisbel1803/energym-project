@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clases | ENERGYM</title>
+    <script src="https://kit.fontawesome.com/09b2ffa585.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/styles/app.css">
+    <link rel="stylesheet" href="/styles/styles.css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.png">
+    <link href="https://fonts.cdnfonts.com/css/starzoom-shavian" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/tilt-neon" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body class="fuenteTilt bg-gris">
+    <div id="navegacion"></div>
+
+    <!--SECCION DE INSTRUCTORES-->
+    <section class="md:ml-40 pt-10">
+        <h1 class="text-4xl font-semibold text-center py-10 fuenteStar text-white"><span class="text-verde text-5xl">Editar</span> instructor</h1>
+
+        <div class="md:w-2/4 w-screen bg-white my-auto md:p-12 p-6 rounded-2xl mx-auto">
+            <p class="notificacion hidden border-2 p-4 text-center rounded-2xl mb-4"></p>
+
+            <form id="form-instructor" class="bg-white flex flex-col gap-4 shadow shadow-verde rounded-2xl p-4">
+                <div>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="nombre-instructor">Nombre:</label>
+                    <input id="nombre-instructor" name="nombre-instructor" type="text" class="h-10 border border-verde rounded-2xl p-4 w-full">
+                </div>
+                <div>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="apellido-instructor">Apellido:</label>
+                    <input id="apellido-instructor" name="apellido-instructor" type="text" class="h-10 border border-verde rounded-2xl p-4 w-full">
+                </div>
+                <div>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="cedula-instructor">Cedula:</label>
+                    <input id="cedula-instructor" name="cedula-instructor" type="number" class="h-10 border border-verde rounded-2xl p-4 w-full">
+                </div>
+                <div>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="telefono-instructor">Telefono:</label>
+                    <input id="telefono-instructor" name="telefono-instructor" type="number" class="h-10 border border-verde rounded-2xl p-4 w-full">
+                </div>
+                <div>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="email-instructor">Email:</label>
+                    <input id="email-instructor" name="email-instructor" type="email" class="h-10 border border-verde rounded-2xl p-4 w-full">
+                </div>
+                <div>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="especialidades">Especialidades:</label>
+                    
+                    <label for="yoga-esp" class="text-gray-700 text-sm font-bold">Yoga</label>
+                    <input id="yoga-esp" value="yoga" name="especialidades" type="checkbox">
+                    
+                    <label for="baile-esp" class="text-gray-700 text-sm font-bold">Baile</label>
+                    <input id="baile-esp" value="baile" name="especialidades" type="checkbox">
+                    
+                    <label for="boxeo-esp" class="text-gray-700 text-sm font-bold">Boxeo</label>
+                    <input id="boxeo-esp" value="boxeo" name="especialidades" type="checkbox">
+                    
+                    <label for="spinning-esp" class="text-gray-700 text-sm font-bold">Spinning</label>
+                    <input id="spinning-esp" value="spinning" name="especialidades" type="checkbox">
+                    
+                    <label for="step-esp" class="text-gray-700 text-sm font-bold">Step</label>
+                    <input id="step-esp" value="step" name="especialidades" type="checkbox">
+                </div>
+                
+                <button type="submit" class="text-white bg-verde p-3 rounded-2xl font-bold transition ease-in hover:bg-verde/80">Guardar</button>
+                <a href="/panel-administrador/" class="text-white bg-red-500 p-3 rounded-2xl font-bold transition ease-in hover:bg-red-400 text-center">Cancelar</a>
+            </form>
+
+        </div>
+    </section>
+
+
+    <script src="js/editar-instructor.js"></script>
+    <script src="/components/nav-admin.js"></script>
+</body>
+</html>

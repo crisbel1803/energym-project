@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENERGYM | LOG-IN</title>
+    <script src="https://kit.fontawesome.com/09b2ffa585.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/styles/app.css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.png">
+    <link rel="stylesheet" href="/styles/styles.css">
+    <link href="https://fonts.cdnfonts.com/css/starzoom-shavian" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/tilt-neon" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body class="bg-black fuenteTilt">
+    <!--NAVBAR-->
+    <header id="navegacion"></header>
+
+    <!--FORM LOGIN-->
+    <section class="slide-in-bottom">
+        <form id="form-login" class="bg-gris w-10/12 md:w-1/2 flex flex-col justify-center items-center border border-verde rounded-3xl p-4 mx-auto my-24">
+            <h1 class="md:text-3xl text-center text-white font-bold py-6">Ingresa tus datos para iniciar sesión:</h1>
+            <p class="notificacion text-red-600 hidden border-2 p-4 text-center rounded-2xl mb-4"></p>
+            <div class="flex flex-col gap-6">
+                <div>
+                    <label for="email-input" class="block text-white text-sm font-semibold mb-2">Correo electrónico:</label>
+                    <input id="email-input" type="email" autocomplete="off" class="border border-verde rounded-3xl text-white py-2 px-6 w-full">
+                </div>
+                <div>
+                    <label for="password-input" class="block text-white text-sm font-semibold mb-2">Contraseña:</label>
+                    <input id="password-input" type="password" autocomplete="off" class="border border-verde rounded-4xl text-white py-2 px-6 w-full">
+                </div>
+            </div>
+            <button id="btn-login" type="submit" class="text-xl transition ease-in-out font-bold text-white hover:text-verde py-6 uppercase">Iniciar sesión</button>
+            <div class="text-center pb-8 border-t border-t-verde">
+                <p class="text-verde pt-4">¿Eres nuevo en ENERGYM?</p>
+                <a href="/registro/" class="text-white">crea una cuenta <span class="font-bold">aquí.</span></a>
+            </div>
+        </form>        
+    </section>
+
+    <!--FOOTER-->
+    <footer class="bg-black" id="footer"></footer>
+    
+    <script src="/components/nav.js"></script>
+    <script src="/components/footer.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>

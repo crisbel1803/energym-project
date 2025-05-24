@@ -1,0 +1,186 @@
+/*FUENTES*/
+@import url('https://fonts.cdnfonts.com/css/starzoom-shavian');
+.fuenteStar{
+  font-family: 'Starzoom Shavian', sans-serif;
+}
+
+@import url('https://fonts.cdnfonts.com/css/tilt-neon');
+.fuenteTilt{
+  font-family: 'Tilt Neon', sans-serif;
+}
+
+/*EFECTO HOVER EN LINKS NAV*/
+.hover-underline {
+    font-size: 16px;
+    color: #ffffff;
+    position: relative;
+    display: inline-block;
+  }
+  
+  .hover-underline::after,
+  .hover-underline::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, #1e1e1e, #00c24f);
+    bottom: -5px;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease-out;
+  }
+  
+  .hover-underline::before {
+    top: -5px;
+    transform-origin: left;
+  }
+  
+  .hover-underline:hover::after,
+  .hover-underline:hover::before {
+    transform: scaleX(1);
+  }
+
+/*GRAYSCALE DE BANNER*/
+/*BANNER HOME*/
+.banner-home{
+    background-image: url(/images/banner-1.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+/*SECCION CLASES*/
+#clases-section{
+  background-image: url(/images/banner-3.webp);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+#card-class-1{
+  background-image: url(/images/class-1.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+#card-class-2{
+  background-image: url(/images/class-2.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+#card-class-3{
+  background-image: url(/images/class-3.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+#card-class-4{
+  background-image: url(/images/class-4.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+/*SECCION INSTRUCTORES*/
+#coach-card-1{
+  background-image: url(/images/coach-1.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+#coach-card-2{
+  background-image: url(/images/coach-2.avif);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+#coach-card-3{
+  background-image: url(/images/coach-3.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+#coach-card-4{
+  background-image: url(/images/coach-4.avif);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+/*ANIMACION SCROLL Y BUTTON*/
+@-webkit-keyframes bounce-in-bottom{0%{-webkit-transform:translateY(500px);transform:translateY(500px);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in;opacity:0}38%{-webkit-transform:translateY(0);transform:translateY(0);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out;opacity:1}55%{-webkit-transform:translateY(65px);transform:translateY(65px);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}72%{-webkit-transform:translateY(0);transform:translateY(0);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out}81%{-webkit-transform:translateY(28px);transform:translateY(28px);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}90%{-webkit-transform:translateY(0);transform:translateY(0);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out}95%{-webkit-transform:translateY(8px);transform:translateY(8px);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}100%{-webkit-transform:translateY(0);transform:translateY(0);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out}}@keyframes bounce-in-bottom{0%{-webkit-transform:translateY(500px);transform:translateY(500px);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in;opacity:0}38%{-webkit-transform:translateY(0);transform:translateY(0);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out;opacity:1}55%{-webkit-transform:translateY(65px);transform:translateY(65px);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}72%{-webkit-transform:translateY(0);transform:translateY(0);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out}81%{-webkit-transform:translateY(28px);transform:translateY(28px);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}90%{-webkit-transform:translateY(0);transform:translateY(0);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out}95%{-webkit-transform:translateY(8px);transform:translateY(8px);-webkit-animation-timing-function:ease-in;animation-timing-function:ease-in}100%{-webkit-transform:translateY(0);transform:translateY(0);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out}}
+.bounce-in-bottom{-webkit-animation:bounce-in-bottom 1.1s both;animation:bounce-in-bottom 1.1s both}
+
+@keyframes slide-in-bottom{0%{transform:translateY(1000px);opacity:0}100%{transform:translateY(0);opacity:1}}
+.slide-in-bottom{animation:slide-in-bottom 1.2s cubic-bezier(.55,.085,.68,.53) both}
+
+@keyframes heartbeat{from{transform:scale(1);transform-origin:center center;animation-timing-function:ease-out}10%{transform:scale(.91);animation-timing-function:ease-in}17%{transform:scale(.98);animation-timing-function:ease-out}33%{transform:scale(.87);animation-timing-function:ease-in}45%{transform:scale(1);animation-timing-function:ease-out}}
+.heartbeat{animation:heartbeat 1.5s ease-in-out 1.5s infinite both}
+
+/*ANIMACION POPUP CALENDARIO*/
+@keyframes myAnim1 {
+	0% {
+		transform: scaleY(0.5);
+	}
+
+	100% {
+		transform: scaleY(1);
+	}
+}
+
+.in-vertical{
+  animation: myAnim1 1s ease 0s 1 normal forwards;
+}
+
+/*animacion  sidebar admin*/
+@keyframes sidebarAnim {
+	0% {
+		transform: scaleX(0);
+		transform-origin: 0% 0%;
+	}
+
+	100% {
+		transform: scaleX(1);
+		transform-origin: 0% 0%;
+	}
+}
+
+.menuMobile2{
+  animation: sidebarAnim .5s ease 0s 1 normal forwards;
+}
+
+/*BOTON DE SCROLL UP*/
+#scrollUpBtn {
+  display: none; /* Oculto por defecto */
+  position: fixed; /* Posición fija para que se quede en la pantalla al hacer scroll */
+  bottom: 20px;
+  right: 30px;
+  z-index: 99; /* Asegura que esté por encima de otros elementos */
+  border: none;
+  outline: none;
+  background-color: #00c24f; /* Un color de fondo */
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+#scrollUpBtn:hover {
+  background-color: #088038; /* Oscurecer al pasar el ratón */
+}
+
+/*ESTILOS DEL CALENDARIO*/
+.fc-event-title {
+    display: block !important;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.fc-event-time {
+    font-weight: bold;
+    display: block;
+    text-align: center;
+}

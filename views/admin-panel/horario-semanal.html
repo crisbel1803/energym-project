@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programacion | ENERGYM</title>
+    <script src="https://kit.fontawesome.com/09b2ffa585.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/styles/app.css">
+    <link rel="stylesheet" href="/styles/styles.css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.png">
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link href="https://fonts.cdnfonts.com/css/starzoom-shavian" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/tilt-neon" rel="stylesheet">
+</head>
+<body class="fuenteTilt bg-gris">
+    <div id="navegacion"></div>
+
+    <section class="md:ml-40 pt-10">
+        <div class="pb-10">
+            <h1 class="text-4xl font-semibold text-center py-10 fuenteStar text-white"><span class="text-verde text-5xl">Programacion</span> semanal</h1>
+        
+            <a id="btn-ver-popup4" class="text-white bg-verde p-3 rounded-2xl font-semibold transition ease-in hover:bg-verde/80 ml-6">Agregar clase</a>
+
+            <div id="modal-eventos" class="popup4 hidden fixed top-0 left-0 w-screen h-screen bg-black/40 justify-center z-10 overflow-y-auto">
+            <div class="md:w-2/4 w-screen bg-white my-auto md:p-12 p-6 rounded-2xl">
+                <button id="cerrar-popup4" class="text-end w-full"><i class="fa-solid fa-xmark text-2xl" style="color: #00c24f;"></i></button>
+                <h3 class="text-2xl font-semibold text-center py-4 fuenteStar">Agregue un evento</h3>
+                <p class="notificacion hidden border-2 p-4 text-center rounded-2xl mb-4"></p>
+                <form id="form-evento" class="bg-white flex flex-col gap-4 shadow shadow-verde rounded-2xl p-4">
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="titulo-evento">Disciplina:</label>
+                        <select id="titulo-evento" required class="appearance-none border border-verde rounded-2xl w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <!--disciplinas de la bd-->
+                            <option selected disabled value="">--Seleccione una disciplina</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="descripcion-evento">Descripcion:</label>
+                        <input id="descripcion-evento" name="descripcion-evento" type="text" class="h-10 border border-verde rounded-2xl p-4 w-full">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="inicio-evento">Fecha de inicio:</label>
+                        <input id="inicio-evento" name="inicio-evento" type="datetime-local" class="h-10 border border-verde rounded-2xl p-4 w-full">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="fin-evento">Fecha de fin:</label>
+                        <input id="fin-evento" name="fin-evento" type="datetime-local" class="h-10 border border-verde rounded-2xl p-4 w-full">
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2"  for="salon-evento">Salón:</label>
+                        <select id="salon-evento" required class="appearance-none border border-verde rounded-2xl w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <!--salones de la bd-->
+                            <option selected disabled value="">--Seleccione un salon</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2"  for="instructor-evento">Instructor:</label>
+                        <select id="instructor-evento" required class="appearance-none border border-verde rounded-2xl w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <!--instructores de la bd-->
+                            <option selected disabled value="">--Seleccione un instructor</option>
+                        </select>
+                    </div>
+    
+                    <button type="submit" class="text-white bg-verde p-3 rounded-2xl font-bold transition ease-in hover:bg-verde/80">Guardar</button>
+                </form>
+            </div>
+            </div>
+
+            <div id="calendar" class="bg-white md:w-4/5 mx-auto md:p-10 p-4 rounded-2xl mt-10 w-lg overflow-x-auto"></div>
+
+
+       
+            <div id="eventModal" class="modal hidden fixed z-50 left-0 top-0 w-full h-full bg-black/50">
+                <div class="modal-content bg-white mx-auto mt-[10%] p-5 rounded-md text-center w-5/6 md:w-2/5">
+                    <button class="close text-end w-full cursor-pointer"><i class="fa-solid fa-xmark text-2xl" style="color: #00c24f;"></i></button>
+                    <h2 id="modalTitle" class="text-2xl uppercase fuenteStar pb-2 text-verde"></h2>
+                    <p class="text-xl fuenteStar"><span id="modalInstructor"></span></p>
+                    <p class="text-lg pb-2">Descripción: <span id="modalDescription"></span></p>
+                    <table class="w-full text-sm text-center text-gray-700">
+                       <thead class="text-gray-700 uppercase bg-gray-50">
+                        <tr class="bg-verde text-white">
+                            <th>
+                                Inicio:
+                            </th>
+                            <th>
+                                Fin:
+                            </th>
+                            <th>
+                                Salón:
+                            </th>
+                        </tr>
+                       </thead>
+                       <tbody class="bg-white">
+                        <tr class="bg-gray-50">
+                            <td id="modalStart"></td>
+                            <td id="modalEnd"></td>
+                            <td id="modalRoom"></td>
+                        </tr>
+                       </tbody>
+                    </table>
+                    <div class="flex justify-start gap-4 mt-4">
+                        <a id="editar-evento" class="bg-blue-400 text-white p-2 rounded-2xl"><i class="fa-solid fa-pencil" style="color: #fff;"></i></a>
+                        <a id="eliminar-evento" class="bg-red-400 text-white p-2 rounded-2xl cursor-pointer"><i class="fa-solid fa-trash eliminar" style="color: #fff;"></i></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js'></script>
+
+    <script src="js/calendar.js"></script>
+    <script src="js/nuevo-evento.js"></script>
+    <script src="/components/nav-admin.js"></script>
+    <script src="/components/popupHorario.js"></script>
+</body>
+</html>

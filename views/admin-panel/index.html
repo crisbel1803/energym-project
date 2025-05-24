@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clases | ENERGYM</title>
+    <script src="https://kit.fontawesome.com/09b2ffa585.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/styles/app.css">
+    <link rel="stylesheet" href="/styles/styles.css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.png">
+    <link href="https://fonts.cdnfonts.com/css/starzoom-shavian" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/tilt-neon" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body class="fuenteTilt bg-gris">
+    <div id="navegacion"></div>
+
+    <!--SECCION DE DISCIPLINASS-->
+    <section class="md:ml-40 pt-10">
+        <h1 class="text-4xl font-semibold text-center py-10 fuenteStar text-white"><span class="text-verde text-5xl">Control</span> de disciplinas</h1>
+        <a id="btn-ver-popup" class="text-white bg-verde p-3 rounded-2xl font-semibold transition ease-in hover:bg-verde/80 ml-6">Agregar +</a>
+
+        <div id="modal-disciplinas" class="popup hidden fixed top-0 left-0 w-screen h-screen bg-black/40 justify-center z-10 overflow-y-auto">
+            <div class="md:w-2/4 w-screen bg-white my-auto md:p-12 p-6 rounded-2xl">
+                <button id="cerrar-popup" class="text-end w-full"><i class="fa-solid fa-xmark text-2xl" style="color: #00c24f;"></i></button>
+                <h3 class="text-2xl font-semibold text-center py-4 fuenteStar">Agregue una disciplina</h3>
+                <p class="notificacion hidden border-2 p-4 text-center rounded-2xl mb-4"></p>
+                <form id="form-disciplina" class="bg-white flex flex-col gap-4 shadow shadow-verde rounded-2xl p-4">
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="nombre-disciplina">Nombre:</label>
+                        <input id="nombre-disciplina" name="nombre-disciplina" type="text" class="h-10 border border-verde rounded-2xl p-4 w-full">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="descripcion-disciplina">Descripcion:</label>
+                        <input id="descripcion-disciplina" name="descripcion-disciplina" type="text" class="h-10 border border-verde rounded-2xl p-4 w-full">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="duracion-disciplina">Duracion (minutos):</label>
+                        <input id="duracion-disciplina" name="duracion-disciplina" type="number" class="h-10 border border-verde rounded-2xl p-4 w-full">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="nivel-disciplina">Nivel:</label>
+                        <select id="nivel-disciplina" name="nivel-disciplina" class="appearance-none border border-verde rounded-2xl w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <option selected disabled value="">--Seleccione un nivel</option>
+                            <option value="principiante">Principiante</option>
+                            <option value="intermedio">Intermedio</option>
+                            <option value="avanzado">Avanzado</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="capacidad-disciplina">Capacidad:</label>
+                        <input id="capacidad-disciplina" name="capacidad-disciplina" type="number" class="h-10 border border-verde rounded-2xl p-4 w-full">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="precio-disciplina">Precio ($):</label>
+                        <input id="precio-disciplina" name="precio-disciplina" type="number" class="h-10 border border-verde rounded-2xl p-4 w-full">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="status-disciplina">Estatus:</label>
+                        <select name="status-disciplina" id="status-disciplina" class="appearance-none border border-verde rounded-2xl w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <option selected disabled value="">--Seleccione un status</option>
+                            <option value="activa">Activa</option>
+                            <option value="inactiva">Inactiva</option>
+                        </select>
+                    </div>
+    
+                    <button type="submit" class="text-white bg-verde p-3 rounded-2xl font-bold transition ease-in hover:bg-verde/80">Guardar</button>
+                </form>
+            </div>
+        </div>
+
+        <!--CATALOGO DE DISCIPLINAS BD-->
+        <div class="max-w-11/12 mx-auto mt-12">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4" id="cont-disciplinas">
+            
+            </div>
+        </div>
+    </section>
+
+    <!--SECCION DE INSTRUCTORES-->
+    <section class="md:ml-40">
+        <h1 class="text-4xl font-semibold text-center fuenteStar text-white py-10"><span class="text-verde text-5xl">Control</span> de instructores</h1>
+        <a id="btn-ver-popup2" class="text-white bg-verde p-3 rounded-2xl font-semibold transition ease-in hover:bg-verde/80 ml-6">Agregar +</a>
+
+        <div id="modal-instructores" class="popup2 hidden fixed top-0 left-0 w-screen h-screen bg-black/40 justify-center z-10 overflow-y-auto">
+            <div class="md:w-2/4 w-screen bg-white my-auto md:p-12 p-6 rounded-2xl">
+                <button id="cerrar-popup2" class="text-end w-full"><i class="fa-solid fa-xmark text-2xl" style="color: #00c24f;"></i></button>
+                <h3 class="text-2xl font-semibold text-center py-4 fuenteStar">Agregue un instructor</h3>
+                <p class="notificacion2 hidden border-2 p-4 text-center rounded-2xl mb-4"></p>
+                <form id="form-instructor" class="bg-white flex flex-col gap-4 shadow shadow-verde rounded-2xl p-4">
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="nombre-instructor">Nombre:</label>
+                        <input id="nombre-instructor" name="nombre-instructor" type="text" class="h-10 border border-verde rounded-2xl p-4 w-full">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="apellido-instructor">Apellido:</label>
+                        <input id="apellido-instructor" name="apellido-instructor" type="text" class="h-10 border border-verde rounded-2xl p-4 w-full">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="cedula-instructor">Cedula:</label>
+                        <input id="cedula-instructor" name="cedula-instructor" type="number" class="h-10 border border-verde rounded-2xl p-4 w-full">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="telefono-instructor">Telefono:</label>
+                        <input id="telefono-instructor" name="telefono-instructor" type="number" class="h-10 border border-verde rounded-2xl p-4 w-full">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="email-instructor">Email:</label>
+                        <input id="email-instructor" name="email-instructor" type="email" class="h-10 border border-verde rounded-2xl p-4 w-full">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="especialidades">Especialidades:</label>
+                        
+                        <label for="yoga-esp" class="text-gray-700 text-sm font-bold">Yoga</label>
+                        <input id="yoga-esp" value="yoga" name="especialidades" type="checkbox">
+                        
+                        <label for="baile-esp" class="text-gray-700 text-sm font-bold">Baile</label>
+                        <input id="baile-esp" value="baile" name="especialidades" type="checkbox">
+                        
+                        <label for="boxeo-esp" class="text-gray-700 text-sm font-bold">Boxeo</label>
+                        <input id="boxeo-esp" value="boxeo" name="especialidades" type="checkbox">
+                        
+                        <label for="spinning-esp" class="text-gray-700 text-sm font-bold">Spinning</label>
+                        <input id="spinning-esp" value="spinning" name="especialidades" type="checkbox">
+                        
+                        <label for="step-esp" class="text-gray-700 text-sm font-bold">Step</label>
+                        <input id="step-esp" value="step" name="especialidades" type="checkbox">
+                    </div>
+                    
+                    <button type="submit" class="text-white bg-verde p-3 rounded-2xl font-bold transition ease-in hover:bg-verde/80">Guardar</button>
+                </form>
+            </div>
+        </div>
+
+        <!--TABLA DE INSTRUCTORES BD-->
+        <div class="max-w-11/12 mx-auto mt-12">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4" id="cont-instructores">
+            
+            </div>
+        </div>
+    </section>
+
+    <!--SECCION DE SALONES-->
+    <section class="md:ml-40">
+        <h1 class="text-4xl font-semibold text-center fuenteStar text-white py-10"><span class="text-verde text-5xl">Control</span> de salones</h1>
+        <a id="btn-ver-popup3" class="text-white bg-verde p-3 rounded-2xl font-semibold transition ease-in hover:bg-verde/80 ml-6">Agregar +</a>
+
+        <div id="modal-salones" class="popup3 hidden fixed top-0 left-0 w-screen h-screen bg-black/40 justify-center z-10 overflow-y-auto">
+            <div class="md:w-2/4 w-screen bg-white my-auto md:p-12 p-6 rounded-2xl">
+                <button id="cerrar-popup3" class="text-end w-full"><i class="fa-solid fa-xmark text-2xl" style="color: #00c24f;"></i></button>
+                <h3 class="text-2xl font-semibold text-center py-4 fuenteStar">Agregue un salon</h3>
+                <p class="notificacion3 hidden border-2 p-4 text-center rounded-2xl mb-4"></p>
+                <form id="form-salon" class="bg-white flex flex-col gap-4 shadow shadow-verde rounded-2xl p-4">
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="nombre-salon">Nombre:</label>
+                        <input id="nombre-salon" name="nombre-instructor" type="text" class="h-10 border border-verde rounded-2xl p-4 w-full">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="capacidad-salon">Capacidad:</label>
+                        <input id="capacidad-salon" name="capacidad-salon" type="number" class="h-10 border border-verde rounded-2xl p-4 w-full">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="descripcion-salon">Descripcion:</label>
+                        <input id="descripcion-salon" name="descripcion-salon" type="text" class="h-10 border border-verde rounded-2xl p-4 w-full">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="equipamiento-salon">Equipamiento:</label>
+                        <select id="equipamiento-salon" name="equipo-salon" class="appearance-none border border-verde rounded-2xl w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <option selected disabled value="">--Seleccione un equipo</option>
+                            <option value="espejos">Espejos</option>
+                            <option value="trx">TRX</option>
+                            <option value="artmarciales">Artes Marciales</option>
+                            <option value="funcionales">Funcionales</option>
+                            <option value="bicicletas">Bicicletas estáticas</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="equipo-salon">Ubicacion:</label>
+                        <select id="ubicacion-salon" name="ubicacion-salon" class="appearance-none border border-verde rounded-2xl w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <option selected disabled value="">--Seleccione una ubicacion</option>
+                            <option value="piscina">Piscina</option>
+                            <option value="pb">Planta baja</option>
+                            <option value="p1">Piso 1</option>
+                            <option value="p2">Piso 2</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="status-salon">Status:</label>
+                        <select id="status-salon" name="status-salon" class="appearance-none border border-verde rounded-2xl w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <option selected disabled value="">--Seleccione un status</option>
+                            <option value="habilitado">Habilitado</option>
+                            <option value="deshabilitado">Deshabilitado</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="text-white bg-verde p-3 rounded-2xl font-bold transition ease-in hover:bg-verde/80">Guardar</button>
+                </form>
+            </div>
+        </div>
+
+        <!--TABLA DE INSTRUTORES BD-->
+        <div class="max-w-11/12 mx-auto mt-12">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4" id="cont-salones">
+            
+            </div>
+        </div>
+    </section>
+
+    <script src="js/nueva-disciplina.js"></script>
+    <script src="js/nuevo-instructor.js"></script>
+    <script src="js/nuevo-salon.js"></script>
+    <script src="/components/popup.js"></script>
+    <script src="/components/nav-admin.js"></script>
+</body>
+</html>

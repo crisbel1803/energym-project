@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENERGYM | REGISTRO</title>
+    <script src="https://kit.fontawesome.com/09b2ffa585.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/styles/app.css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.png">
+    <link rel="stylesheet" href="/styles/styles.css">
+    <link href="https://fonts.cdnfonts.com/css/starzoom-shavian" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/tilt-neon" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body class="bg-black fuenteTilt">
+    <header id="navegacion"></header>
+    
+    <section class="slide-in-bottom">
+        <form id="form-registro" class="bg-gris w-10/12 md:w-1/2 flex flex-col justify-center items-center border border-verde rounded-3xl p-4 mx-auto my-24">
+            <h1 class="md:text-3xl text-center text-white font-bold py-6">Llena todos los campos:</h1>
+            <p class="notificacion hidden border-2 p-4 text-center rounded-2xl mb-4"></p>
+            <div class="flex flex-col">
+                <div>
+                    <label for="name-input" class="block text-white text-sm font-semibold mb-2">Nombre y apellido:</label>
+                    <input type="text" id="name-input" autocomplete="off" class="border border-verde rounded-3xl text-white py-2 px-6 w-full">
+                </div>
+                <p class="text-xs text-white py-4">El nombre y apellido deben comenzar con mayúscula. <span class="font-bold">(*)</span></p>
+
+                <div>
+                    <label for="email-input" class="block text-white text-sm font-semibold mb-2">Correo electrónico:</label>
+                    <input type="email" id="email-input" autocomplete="off" class="border border-verde rounded-3xl text-white py-2 px-6 w-full">
+                </div>
+                <p class="text-xs text-white py-4">El campo de correo es obligatorio. <span class="font-bold">(*)</span></p>
+
+                <div>
+                    <label for="password-input" class="block text-white text-sm font-semibold mb-2">Crear contraseña:</label>
+                    <input type="password" id="password-input" autocomplete="off" class="border border-verde rounded-3xl text-white py-2 px-6 w-full">
+                </div>
+                <p class="text-xs text-white py-4">La contraseña debe contener:
+                    <br>al menos 1 letra y 1 número,
+                    <br>mayúscula y minúscula,
+                    <br>al menos 1 caracter especial,
+                    <br>al menos 8 caracteres.
+                </p>
+
+                <div>
+                    <label for="match-password" class="block text-white text-sm font-semibold mb-2">Repetir contraseña:</label>
+                    <input type="password" id="match-password" autocomplete="off" class="border border-verde rounded-3xl text-white py-2 px-6 w-full">
+                </div>
+                <p class="text-xs text-white py-4">Las contraseñas deben coincidir. <span class="font-bold">(*)</span></p>
+            
+            </div>
+            <button type="submit" id="btn-registro" class="text-xl transition ease-in-out font-bold text-white hover:text-verde py-6 uppercase">Crear cuenta</button>
+            <div class="text-center pb-8 border-t border-t-verde pt-4">
+                <a href="/login/" class="text-white">Si ya estás registrado, <span class="font-bold text-verde hover:underline">inicia sesión.</span></a>
+            </div>
+        </form>        
+    </section>
+
+    <footer class="bg-black" id="footer"></footer>
+    
+    <script src="/components/nav.js"></script>
+    <script src="/components/footer.js"></script>
+    <script src="index.js"></script>
+
+</body>
+</html>

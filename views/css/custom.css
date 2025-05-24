@@ -1,0 +1,8 @@
+.footer-pc{
+    background-image: url(/views/img/elemento-footer.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 752px;
+    width: 100%;
+}
