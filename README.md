@@ -74,7 +74,7 @@ pagos.js: Muestra reservas pagadas y permite a los administradores confirmar pag
 
   ### Versión ANTEPROYECTO: b686463c332493ab333b6534245fffa24e8a514f
 
-## Visualiza la app online: [http](https://energym-project.onrender.com/)
+## Visualiza la app online: [link pagina](https://energym-project.onrender.com/)
 
 ## 📧 Contacto
 Crisbel Cedeño 
