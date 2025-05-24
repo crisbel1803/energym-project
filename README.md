@@ -72,6 +72,8 @@ pagos.js: Muestra reservas pagadas y permite a los administradores confirmar pag
 * public/: Archivos estáticos accesibles públicamente, incluyendo public/data/uploads/ para imágenes subidas.
 * views/: Páginas HTML y assets (css/, img/, components/).
 
+  ### Versión ANTEPROYECTO: 
+
 ## 📧 Contacto
 Crisbel Cedeño 
 +58 4120114441 

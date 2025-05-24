@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clases | ENERGYM</title>
+    <script src="https://kit.fontawesome.com/09b2ffa585.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/styles/app.css">
+    <link rel="stylesheet" href="/styles/styles.css">
+    <link rel="stylesheet" href="/styles/slider.css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.png">
+    <link href="https://fonts.cdnfonts.com/css/starzoom-shavian" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/tilt-neon" rel="stylesheet">
+
+</head>
+<body class="scroll-smooth fuenteTilt">
+    <!--NAVBAR-->
+    <header id="navegacion"></header>
+
+    <div id="preloader" class="fixed inset-0 bg-black flex justify-center items-center">
+      <i class="fa-solid fa-spinner text-verde text-6xl animate-spin"></i>
+    </div>
+
+    <section class=" bg-gris pb-10">
+        <h1 class="text-4xl font-semibold text-center py-10 fuenteStar text-white">
+            <span class="text-verde text-5xl">Nuestras</span> Disciplinas
+        </h1>
+
+        <div class="flex flex-col items-center px-4">
+            <div class="text-gray-700 bg-white p-6 md:p-8 rounded-xl shadow-lg w-full max-w-6xl overflow-hidden">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800">Explora Nuestras Clases</h2>
+                
+                <p class="notificacion hidden border-2 p-4 text-center rounded-2xl mb-4"></p>
+
+                <div class="flex flex-col sm:flex-row gap-4 mb-8 justify-center">
+                    <div class="w-full sm:w-1/2 md:w-1/3">
+                        <label for="filtro-status" class="block text-gray-700 text-sm font-bold mb-2">Filtrar por Estatus:</label>
+                        <select id="filtro-status" class="appearance-none border border-verde rounded-2xl w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <option value="todos">Todos</option>
+                            <option value="activa">Activa</option>
+                            <option value="inactiva">Inactiva</option>
+                        </select>
+                    </div>
+                    <div class="w-full sm:w-1/2 md:w-1/3">
+                        <label for="filtro-nivel" class="block text-gray-700 text-sm font-bold mb-2">Filtrar por Nivel:</label>
+                        <select id="filtro-nivel" class="appearance-none border border-verde rounded-2xl w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <option value="todos">Todos</option>
+                            <option value="principiante">Principiante</option>
+                            <option value="intermedio">Intermedio</option>
+                            <option value="avanzado">Avanzado</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="listaDisciplinas" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    </div>
+                <div id="noDisciplinasMsj" class="hidden text-center py-8 text-gray-500">
+                    <p class="text-lg">No hay disciplinas que coincidan con tus criterios de búsqueda.</p>
+                    <i class="fa-solid fa-magnifying-glass-minus text-4xl mt-4"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--FOOTER-->
+    <footer class="bg-black" id="footer"></footer>
+    
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js'></script>
+    <script src="/components/nav.js"></script>
+    <script src="index.js"></script>
+    <script src="/components/popup.js"></script>    
+    <script src="/components/preloader.js"></script>
+    <script src="/components/footer.js"></script>
+    <script src="/components/scrollreveal.js"></script>
+</body>
+</html>

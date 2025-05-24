@@ -12,11 +12,12 @@ document.addEventListener('DOMContentLoaded', async function () {
       extendedProps: {
         description: evento.description,
         room: evento.room,
-        instructor: evento.instructor
+        instructor: evento.instructor,
+        capacidad: evento.capacidad,
+        precio: evento.precio
       }
     }));
 
-    console.log(arrayEventos);
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: 'dayGridWeek',
@@ -26,7 +27,10 @@ document.addEventListener('DOMContentLoaded', async function () {
       eventClick: function(info) {
         const eventoId = info.event.id;   
         console.log('Evento ID:', eventoId); 
-        document.querySelector('#eventModal').setAttribute('data-event-id', eventoId);
+
+        const modalInfo = document.querySelector('#eventModal')
+
+        //modalInfo.setAttribute('data-event-id', eventoId);
         
         document.getElementById('modalTitle').textContent = info.event.title;
         document.getElementById('modalStart').textContent = info.event.start.toLocaleString();
@@ -34,23 +38,46 @@ document.addEventListener('DOMContentLoaded', async function () {
         document.getElementById('modalDescription').textContent = info.event.extendedProps.description || 'Sin descripción';
         document.getElementById('modalRoom').textContent = info.event.extendedProps.room;
         document.getElementById('modalInstructor').textContent = info.event.extendedProps.instructor;
+        document.getElementById('modalCapacidad').textContent = info.event.extendedProps.capacidad;
+        document.getElementById('modalPrecio').textContent = info.event.extendedProps.precio;
         document.getElementById('editar-evento').href = `editar-evento.html?id=${eventoId}`;
         
         // Agregar evento para eliminar
         document.getElementById('eliminar-evento').onclick = async function() {
-          try {
-            const response = await axios.post('/api/eventos/eliminar', { id: eventoId });
-            console.log(response.data);
+          const confirmar = confirm('Desea eliminar este evento?')
 
-            calendar.refetchEvents();
-                        
-            document.getElementById('eventModal').style.display = 'none';
-          } catch (error) {
-            console.error("Error eliminando evento:", error);
-          }
+          if(confirmar){
+            try {
+              const response = await axios.post('/api/eventos/eliminar', { id: eventoId });
+              console.log(response.data);
+
+              //eliminar todos los eventos y volver a cargarlos
+              calendar.removeAllEvents();
+              const eventosRes = await axios.get('/api/eventos/lista-eventos');
+              const arrayEventos = eventosRes.data.data.map(evento => ({
+                id: evento._id,
+                title: evento.title,
+                start: evento.start,
+                end: evento.end,
+                extendedProps: {
+                  description: evento.description,
+                  room: evento.room,
+                  instructor: evento.instructor,
+                  capacidad: evento.capacidad,
+                  precio: evento.precio
+                }
+              }));
+
+              calendar.addEventSource(arrayEventos);
+                          
+              modalInfo.style.display = 'none';
+            } catch (error) {
+              console.error("Error eliminando evento:", error);
+            }
+        }
         };
 
-        document.getElementById('eventModal').style.display = 'block';
+        modalInfo.style.display = 'block';
       },
 
       eventContent: function(arg) {
@@ -74,3 +101,4 @@ document.addEventListener('DOMContentLoaded', async function () {
 document.querySelector('.close').addEventListener('click', function() {
   document.getElementById('eventModal').style.display = 'none';
 });
+

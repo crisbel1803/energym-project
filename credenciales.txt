@@ -1,0 +1,25 @@
+ADMIN USER
+correo: starrybabe18@gmail.com
+password: 123Qwe..
+
+CUENTA DE SANDBOX PARA REALIZAR COMPRAS
+correo: sb-2aita42529691@personal.example.com
+password: &z!A7xL6
+
+TARJETA GUARDADA
+Name
+John Doe
+
+Phone
+5828200640
+Country
+VE
+
+Card Number
+4174413307217478
+
+Expiry
+05/2030
+
+CVC Code
+Any 3 digits

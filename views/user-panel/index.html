@@ -16,10 +16,87 @@
 <body class="fuenteTilt">
     <div id="navegacion"></div>
 
-    <div class="ml-40 bg-gris/40 min-h-screen">
-        <h1>Panel de control</h1>
+    <div id="preloader" class="fixed inset-0 bg-black flex justify-center items-center">
+      <i class="fa-solid fa-spinner text-verde text-6xl animate-spin"></i>
     </div>
 
-    <script src="/components/nav-admin.js"></script>
+    
+    <div class="md:ml-40 pt-10 bg-gris min-h-screen">
+
+        <div class="flex flex-row justify-end w-4/5 mx-auto">
+            <a href="" class="flex flex-row gap-2 items-center transition ease-in-out font-bold border-1 py-2 px-8 rounded-3xl hover:bg-verde text-white hover:border-verde"><i class="fa-solid fa-user"></i><span id="btn-user" class="capitalize"></span></a>
+        </div>
+
+        <div class="w-4/5 mx-auto flex flex-col justify-start mt-6">
+            <h1 class="text-4xl font-bold mb-4 fuenteStar text-center text-verde">Mi perfil</h1>
+            <h2 class="text-xl text-white py-3 border-b border-gray-400 mb-8">Estimad@, <span id="nombre-user" class="capitalize"></span>, aquí puedes ver y editar tu información personal.</h2>
+        
+            <div id="user-info" class="text-white border-t-white w-full mx-auto flex flex-col gap-4 mb-8">
+                
+                <div>
+                    <p><strong>Nombre de usuario:</strong></p>
+                    <p id="nombre" class="capitalize"></p>
+                </div>
+                <div>
+                    <p><strong>Correo Electrónico:</strong></p>
+                    <p id="email"></p>
+                </div>
+                <div>
+                    <p><strong>Telefono:</strong></p>
+                    <p id="telefono"></p>
+                </div>
+
+            </div>
+            <div class="border-b border-gray-400 mb-8"></div>
+        </div>
+
+        <!--ACCIONES DE CUENTA-->
+        <div class="flex flex-row ">
+          <button onclick="eliminarCuenta()" class="mt-4 bg-red-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-600 transition duration-300 mx-auto">Eliminar cuenta</button>
+          <button onclick="abrirForm()" class="mt-4 bg-verde/100 text-white font-bold py-2 px-4 rounded-lg hover:bg-verde/80 transition duration-300 mx-auto">Editar usuario</button>
+        </div>
+
+        <!--FORM EDITAR CUENTA-->
+        <form action="" class="mt-8 pb-8">
+            
+            <div id="form-editar" class="bg-gris flex flex-col justify-center items-center border border-verde rounded-3xl p-4 mx-auto hidden w-4/5 gap-4">
+                <h2 class="md:text-3xl text-center text-white font-bold py-6">Editar información</h2>
+                
+                <div class="flex flex-col gap-2 md:w-2/3">
+                    <div>
+                        <label for="nombre-input" class="block text-white text-sm font-semibold mb-2">Nombre:</label>
+                        <input type="text" id="nombre-input" class="border border-verde rounded-3xl text-white py-2 px-6 w-full">
+                    </div>
+                    <div>
+                        <label for="email-input" class="block text-white text-sm font-semibold mb-2">Correo Electrónico:</label>
+                        <input type="email" id="email-input" class="border border-verde rounded-3xl text-white py-2 px-6 w-full">
+                    </div>
+                    <div>
+                        <label for="telefono-input" class="block text-white text-sm font-semibold mb-2">Teléfono:</label>
+                        <input type="text" id="telefono-input" class="border border-verde rounded-3xl text-white py-2 px-6 w-full">
+                    </div>
+                    <div>
+                        <label for="password-input" class="block text-white text-sm font-semibold mb-2">Nuevo password:</label>
+                        <input type="password" id="password-input" class="border border-verde rounded-3xl text-white py-2 px-6 w-full">
+                    </div>
+                    <div>
+                        <label for="match-input" class="block text-white text-sm font-semibold mb-2">Repetir password:</label>
+                        <input type="password" id="match-input" class="border border-verde rounded-3xl text-white py-2 px-6 w-full">
+                    </div>
+                </div>
+                
+                
+                <button type="submit" disabled id="btn-editar" class="text-xl transition ease-in-out font-bold text-white hover:text-verde py-6 uppercase disabled:opacity-40 disabled:cursor-not-allowed">Guardar cambios</button>
+            </div>
+        </form>
+
+        
+    </div>
+
+    <script src="index.js"></script>
+    <script src="/components/nav-admin.js"></script>    
+    <script src="/components/preloader.js"></script>
+
+
 </body>
 </html>

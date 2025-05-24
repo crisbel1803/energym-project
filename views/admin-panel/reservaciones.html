@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservaciones | ENERGYM</title>
+    <script src="https://kit.fontawesome.com/09b2ffa585.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/styles/app.css">
+    <link rel="stylesheet" href="/styles/styles.css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.png">
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <link href="https://fonts.cdnfonts.com/css/starzoom-shavian" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/tilt-neon" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body class="fuenteTilt min-h-screen bg-gris">
+    <div id="navegacion"></div>
+
+    <div id="preloader" class="fixed inset-0 bg-black flex justify-center items-center">
+      <i class="fa-solid fa-spinner text-verde text-6xl animate-spin"></i>
+    </div>
+
+    <section class="md:ml-40 pt-10 bg-gris pb-10">
+        <h1 class="text-4xl font-semibold text-center py-10 fuenteStar text-white"><span class="text-verde text-5xl">Control</span> de reservaciones</h1>
+
+        <div class="flex flex-col items-center px-4">
+            <div id="misReservas" class="text-gray-700 bg-white p-6 md:p-8 rounded-xl shadow-lg w-full max-w-6xl overflow-hidden">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800">Clases Reservadas</h2>
+                
+                <p class="notificacion hidden border-2 p-4 text-center rounded-2xl mb-4"></p>
+
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-600 uppercase tracking-wider rounded-tl-lg">Usuario</th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-600 uppercase tracking-wider">Fecha de Reserva</th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-600 uppercase tracking-wider">Clase</th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-600 uppercase tracking-wider">Fecha Clase</th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-600 uppercase tracking-wider">Hora Clase</th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-600 uppercase tracking-wider">Status de Pago</th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-600 uppercase tracking-wider rounded-tr-lg">Status Reserva</th>
+                                </tr>
+                        </thead>
+                        <tbody id="listaReservas" class="bg-white divide-y divide-gray-200">
+                            </tbody>
+                    </table>
+                </div>
+                <div id="noReservasMessage" class="hidden text-center py-8 text-gray-500">
+                    <p class="text-lg">No hay reservas para mostrar en este momento.</p>
+                    <i class="fa-solid fa-calendar-xmark text-4xl mt-4"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <script src="js/reservaciones.js"></script>
+    <script src="/components/preloader.js"></script>
+    <script src="/components/nav-admin.js"></script>
+
+</body>
+</html>

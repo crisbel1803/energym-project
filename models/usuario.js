@@ -4,15 +4,26 @@ const mongoose = require('mongoose')
 mongoose.connect('ruta de conexion')*/
 
 //definir el esquema para el modelo usuarios
+const crypto = require('crypto');
+
 const usuarioSchema = new mongoose.Schema({
-    nombre:String,
-    email:String,
-    password:String,
-    rol:{
-        type:String,
-        default:"afiliado"
+    nombre: String,
+    email: String,
+    telefono: String,
+    password: String,
+    rol: {
+        type: String,
+        default: "afiliado"
+    },
+    verified: {
+        type: Boolean,
+        default: false
+    },
+    verificationToken: {
+        type: String,
+        default: () => crypto.randomBytes(20).toString('hex')
     }
-})
+});
 
 //configurar la respuesta del usuario en el esquema
 usuarioSchema.set('toJSON',{

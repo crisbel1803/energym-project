@@ -9,6 +9,12 @@
   font-family: 'Tilt Neon', sans-serif;
 }
 
+/*preloader*/
+#preloader {
+    z-index: 9999;
+    transition: opacity 0.5s ease-out;
+}
+
 /*EFECTO HOVER EN LINKS NAV*/
 .hover-underline {
     font-size: 16px;
@@ -45,6 +51,22 @@
 /*BANNER HOME*/
 .banner-home{
     background-image: url(/images/banner-1.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+/*BANNER CONTACTO*/
+.banner-contacto{
+    background-image: url(/images/hero-1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+/*BANNER CALENDARIO*/
+.banner-calendario{
+    background-image: url(/images/bg-calendario.png);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

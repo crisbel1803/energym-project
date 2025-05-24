@@ -15,6 +15,10 @@
 <body class="fuenteTilt bg-gris">
     <div id="navegacion"></div>
 
+    <div id="preloader" class="fixed inset-0 bg-black flex justify-center items-center">
+      <i class="fa-solid fa-spinner text-verde text-6xl animate-spin"></i>
+    </div>
+
     <!--SECCION DE INSTRUCTORES-->
     <section class="md:ml-40 pt-10">
         <h1 class="text-4xl font-semibold text-center py-10 fuenteStar text-white"><span class="text-verde text-5xl">Editar</span> instructor</h1>
@@ -43,24 +47,6 @@
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="email-instructor">Email:</label>
                     <input id="email-instructor" name="email-instructor" type="email" class="h-10 border border-verde rounded-2xl p-4 w-full">
                 </div>
-                <div>
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="especialidades">Especialidades:</label>
-                    
-                    <label for="yoga-esp" class="text-gray-700 text-sm font-bold">Yoga</label>
-                    <input id="yoga-esp" value="yoga" name="especialidades" type="checkbox">
-                    
-                    <label for="baile-esp" class="text-gray-700 text-sm font-bold">Baile</label>
-                    <input id="baile-esp" value="baile" name="especialidades" type="checkbox">
-                    
-                    <label for="boxeo-esp" class="text-gray-700 text-sm font-bold">Boxeo</label>
-                    <input id="boxeo-esp" value="boxeo" name="especialidades" type="checkbox">
-                    
-                    <label for="spinning-esp" class="text-gray-700 text-sm font-bold">Spinning</label>
-                    <input id="spinning-esp" value="spinning" name="especialidades" type="checkbox">
-                    
-                    <label for="step-esp" class="text-gray-700 text-sm font-bold">Step</label>
-                    <input id="step-esp" value="step" name="especialidades" type="checkbox">
-                </div>
                 
                 <button type="submit" class="text-white bg-verde p-3 rounded-2xl font-bold transition ease-in hover:bg-verde/80">Guardar</button>
                 <a href="/panel-administrador/" class="text-white bg-red-500 p-3 rounded-2xl font-bold transition ease-in hover:bg-red-400 text-center">Cancelar</a>
@@ -71,6 +57,7 @@
 
 
     <script src="js/editar-instructor.js"></script>
+    <script src="/components/preloader.js"></script>
     <script src="/components/nav-admin.js"></script>
 </body>
 </html>

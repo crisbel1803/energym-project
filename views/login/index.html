@@ -16,12 +16,16 @@
     <!--NAVBAR-->
     <header id="navegacion"></header>
 
+    <div id="preloader" class="fixed inset-0 bg-black flex justify-center items-center">
+      <i class="fa-solid fa-spinner text-verde text-6xl animate-spin"></i>
+    </div>
+
     <!--FORM LOGIN-->
     <section class="slide-in-bottom">
         <form id="form-login" class="bg-gris w-10/12 md:w-1/2 flex flex-col justify-center items-center border border-verde rounded-3xl p-4 mx-auto my-24">
             <h1 class="md:text-3xl text-center text-white font-bold py-6">Ingresa tus datos para iniciar sesión:</h1>
             <p class="notificacion text-red-600 hidden border-2 p-4 text-center rounded-2xl mb-4"></p>
-            <div class="flex flex-col gap-6">
+            <div class="flex flex-col gap-6 md:w-2/3">
                 <div>
                     <label for="email-input" class="block text-white text-sm font-semibold mb-2">Correo electrónico:</label>
                     <input id="email-input" type="email" autocomplete="off" class="border border-verde rounded-3xl text-white py-2 px-6 w-full">
@@ -43,7 +47,8 @@
     <footer class="bg-black" id="footer"></footer>
     
     <script src="/components/nav.js"></script>
-    <script src="/components/footer.js"></script>
+    <script src="/components/footer.js"></script>    
+    <script src="/components/preloader.js"></script>
     <script src="index.js"></script>
 </body>
 </html>

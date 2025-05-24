@@ -15,13 +15,16 @@
 <body class="fuenteTilt bg-gris">
     <div id="navegacion"></div>
 
-    <!--SECCION DE DISCIPLINASS-->
+    <div id="preloader" class="fixed inset-0 bg-black flex justify-center items-center">
+      <i class="fa-solid fa-spinner text-verde text-6xl animate-spin"></i>
+    </div>
+
     <section class="md:ml-40 pt-10">
         <h1 class="text-4xl font-semibold text-center py-10 fuenteStar text-white"><span class="text-verde text-5xl">Editar</span> disciplina</h1>
 
         <div class="md:w-2/4 w-screen bg-white my-auto md:p-12 p-6 rounded-2xl mx-auto">
             <p class="notificacion hidden border-2 p-4 text-center rounded-2xl mb-4"></p>
-            <form id="form-disciplina" class="bg-white flex flex-col gap-4 shadow shadow-verde rounded-2xl p-4">
+            <form id="form-disciplina" class="bg-white flex flex-col gap-4 shadow shadow-verde rounded-2xl p-4" enctype="multipart/form-data">
                 <div>
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="nombre-disciplina">Nombre:</label>
                     <input id="nombre-disciplina" name="nombre-disciplina" type="text" class="h-10 border border-verde rounded-2xl p-4 w-full">
@@ -44,14 +47,6 @@
                     </select>
                 </div>
                 <div>
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="capacidad-disciplina">Capacidad:</label>
-                    <input id="capacidad-disciplina" name="capacidad-disciplina" type="number" class="h-10 border border-verde rounded-2xl p-4 w-full">
-                </div>
-                <div>
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="precio-disciplina">Precio ($):</label>
-                    <input id="precio-disciplina" name="precio-disciplina" type="number" class="h-10 border border-verde rounded-2xl p-4 w-full">
-                </div>
-                <div>
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="status-disciplina">Estatus:</label>
                     <select name="status-disciplina" id="status-disciplina" class="appearance-none border border-verde rounded-2xl w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                         <option selected disabled value="">--Seleccione un status</option>
@@ -60,7 +55,15 @@
                     </select>
                 </div>
 
-                <button type="submit" class="text-white bg-verde p-3 rounded-2xl font-bold transition ease-in hover:bg-verde/80">Guardar</button>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="imagen-disciplina">Imagen Actual:</label>
+                    <div id="cont-img-act" class="mb-2">
+                        </div>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="imagen-disciplina-upload">Subir Nueva Imagen (opcional):</label>
+                    <input type="file" id="imagen-disciplina-upload" name="disciplineImage" class="h-10 border border-verde rounded-2xl p-4 w-full">
+                </div>
+
+                <button type="submit" class="text-white bg-verde p-3 rounded-2xl font-bold transition ease-in hover:bg-verde/80">Guardar Cambios</button>
                 <a href="/panel-administrador/" class="text-white bg-red-500 p-3 rounded-2xl font-bold transition ease-in hover:bg-red-400 text-center">Cancelar</a>
             </form>
         </div>
@@ -68,6 +71,7 @@
 
 
     <script src="js/editar-disciplina.js"></script>
+    <script src="/components/preloader.js"></script>
     <script src="/components/nav-admin.js"></script>
 </body>
 </html>

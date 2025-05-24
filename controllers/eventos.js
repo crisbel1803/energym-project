@@ -5,25 +5,27 @@ const evento = require('../models/evento')
 //registrar la informacion que el evento envia
 // a traves del form
 eventoRouter.post('/',(request,response)=>{
-    const { title, start, end, description, room, instructor } = request.body;
-    console.log(title, start, end, description, room, instructor)
-    if (!title || !start || !room || !instructor){
+    const { title, start, end, description, room, instructor, capacidad, precio } = request.body;
+    //console.log(title, start, end, description, room, instructor)
+    if (!title || !start || !end || !room || !instructor || !capacidad || !precio){
         return response.status(400).json({error: 'Todos los campos son obligatorios'});
     }
     else{
         //guardar en la bd
-        let evento1 = new evento({ title, start, end, description, room, instructor });
+        let evento1 = new evento({ title, start, end, description, room, instructor, capacidad, precio });
         evento1.title = title
         evento1.start = start
         evento1.end = end
         evento1.description = description
         evento1.room = room
         evento1.instructor = instructor
+        evento1.capacidad = capacidad
+        evento1.precio = precio
 
         async function guardarEvento(){
             await evento1.save()
             const listaEventos = await evento.find()
-            console.log(listaEventos)
+            //console.log(listaEventos)
         }
 
         guardarEvento().catch(console.error)  
@@ -36,7 +38,7 @@ eventoRouter.get('/lista-eventos',async(request,response)=>{
     //obtener lista de eventos 
     try{
         const listado = await evento.find()
-        console.log(listado)
+        //console.log(listado)
         return response.status(200).json({textOk:true,data:listado})
     }catch(error){
         return response.status(400).json({error:'Ha ocurrido un error'})
@@ -44,14 +46,14 @@ eventoRouter.get('/lista-eventos',async(request,response)=>{
 })
 eventoRouter.post('/actualizar',async (request,response)=>{
     //editar evento
-    console.log('edito')
-    const {title, start, end, description, room, instructor, id} = request.body;
-    console.log(request.body)
+    //console.log('edito')
+    const {title, start, end, description, room, instructor, capacidad, precio, id} = request.body;
+    //console.log(request.body)
     try{    
-            if(!title || !start || !room || !instructor || !id){
+            if(!title || !start || !room || !instructor || !capacidad || !precio || !id){
                 return response.status(400).json({error: 'Todos los campos son obligatorios'});
             }else {
-                const updatedEvento = await evento.findOneAndUpdate({_id:id},{ title: title, start: start, end: end, description: description, room: room, instructor: instructor });
+                const updatedEvento = await evento.findOneAndUpdate({_id:id},{ title: title, start: start, end: end, description: description, room: room, instructor: instructor, capacidad: capacidad, precio: precio });
                 if (!updatedEvento) {
                     return response.status(404).json({error:'No se encontró el evento'});
                 }
@@ -63,7 +65,7 @@ eventoRouter.post('/actualizar',async (request,response)=>{
 })
 eventoRouter.post('/eliminar',async (request,response)=>{
     //eliminar evento
-    console.log('elimino')
+    //console.log('elimino')
     const {id} = request.body;
     try{    
             if(!id){
@@ -80,30 +82,12 @@ eventoRouter.post('/eliminar',async (request,response)=>{
         }
 })
 
-/*eventoRouter.post('/eliminar-multiple',async (request,response)=>{
-    //eliminar evento
-    console.log('elimino')
-    const {ids} = request.body;
-    console.log(request.body)
-    try{    
-            if(!ids){
-                return response.status(400).json({error: 'Todos los campos son obligatorios'});
-            }else {
-                const deleteEvento = await evento.deleteMany({_id:{$in:ids}});
-                if (!deleteEvento) {
-                    return response.status(404).json({error:'No se encontró el evento'});
-                }
-                return response.status(200).json({mensaje:'Evento eliminado correctamente'})
-            }
-        }catch(error){
-            return response.status(400).json({error:'Ha ocurrido un error'})
-        }
-})*/
+
 
 eventoRouter.get('/evento',async(req,response)=>{
     //obtener un evento
     const {id} = req.query
-    console.log(id)
+    //console.log(id)
     try{
         const eventoEncontrado = await evento.findOne({_id:id})
         console.log(eventoEncontrado)

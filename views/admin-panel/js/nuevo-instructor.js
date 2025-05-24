@@ -54,24 +54,38 @@ async function mostrarInsts(){
 
 
     arrayInst.forEach(i => {
-        const {id, nombre, apellido, cedula, telefono, email, especialidades} = i
-        const card = document.createElement('div')
-        card.innerHTML =`
-        <h3 class="text-3xl font-bold mb-3 capitalize">${nombre} ${apellido}</h3>
-        <p class="mb-2"><strong class="font-bold mr-1.5">Cédula:</strong> v-${cedula}</p>
-        <p class="mb-2"><strong class="font-bold mr-1.5">Teléfono:</strong> ${telefono}</p>
-        <p class="mb-2 capitalize"><strong class="font-bold mr-1.5">Email:</strong> ${email}</p>
-        <p class="mb-2"><strong class="font-bold mr-1.5">Especialidades:</strong> ${especialidades}</p>
+            const { id, nombre, apellido, cedula, telefono, email, especialidades } = i;
+            const card = document.createElement('div');
 
-        <div class="px-10 py-4 flex flex-row gap-2 text-center justify-between">
-            <a href="editar-instructor.html?id=${id}"><i class="fa-solid fa-pencil" style="color: #2375b3;"></i></a>
-            <a href="#"><i id="${id}" class="fa-solid fa-trash eliminar" style="color: #ff0000;"></i></a>
-        </div>
-        `  
-        card.classList.add('bg-white', 'rounded-lg', 'shadow-md', 'p-6', 'mb-4', 'w-full')
+            card.innerHTML = `
+                <div class="relative overflow-hidden rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 ease-in-out bg-white flex flex-col h-full">
+                    <div class="relative w-full h-48 sm:h-56 md:h-64 bg-gray-100 flex items-center justify-center rounded-t-lg">
+                         <i class="fa-solid fa-dumbbell text-verde text-8xl opacity-75"></i>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                    </div>
 
-        listadoInst.appendChild(card)
-    });
+                    <div class="p-6 flex-grow">
+                        <h3 class="text-3xl font-bold mb-3 text-gray-800 capitalize">${nombre} ${apellido}</h3>
+                        <p class="mb-2 text-gray-600"><strong class="font-semibold mr-1.5 text-gray-700">Cédula:</strong> v-${cedula}</p>
+                        <p class="mb-2 text-gray-600"><strong class="font-semibold mr-1.5 text-gray-700">Teléfono:</strong> ${telefono || 'N/A'}</p>
+                        <p class="mb-2 text-gray-600"><strong class="font-semibold mr-1.5 text-gray-700">Email:</strong> ${email}</p>
+                        <p class="mb-2 text-gray-600"><strong class="font-semibold mr-1.5 text-gray-700">Especialidades:</strong> ${especialidades || 'No especificadas'}</p>
+                    </div>
+
+                    <div class="py-4 px-6 flex flex-row gap-4 justify-end border-t border-gray-100 bg-gray-50 rounded-b-lg">
+                        <a href="editar-instructor.html?id=${id}" class="text-blue-600 hover:text-blue-800 transition-colors duration-200" title="Editar Instructor">
+                            <i class="fa-solid fa-pencil text-lg"></i>
+                        </a>
+                        <button data-id="${id}" class="btn-eliminar-instructor text-red-600 hover:text-red-800 transition-colors duration-200" title="Eliminar Instructor">
+                            <i class="fa-solid fa-trash text-lg"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            card.classList.add('w-full');
+            listadoInst.appendChild(card);
+        });
 
 }
 

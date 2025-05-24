@@ -9,10 +9,11 @@ footer.innerHTML = `
                     <img src="/images/logo-footer.png" alt="Energym Fitness Club" class="h-24">
                 </a>
             </div>
-            <div class="flex flex-col mx-auto gap-6 w-1/2 pb-6">
+            <div class="login-section flex flex-col mx-auto gap-6 w-1/2 pb-6">
                 <a href="/registro/" class="text-center transition ease-in-out font-bold border-1 py-2 px-8 rounded-3xl hover:text-verde text-white hover:border-verde">Registro</a>
                 <a href="/login/" class="text-center transition ease-in-out font-bold border-1 py-2 px-8 rounded-3xl hover:text-verde text-white hover:border-verde">Iniciar sesión</a>
             </div>
+            <div  class="user-panel hidden flex flex-row justify-center w-full py-10 text-center"></div>
             <p class="text-center text-white py-8 bg-gris">
                 &copy;2025 <span class="hover:underline hover:text-verde">ENERGYM</span> Todos los derechos reservados - Creado por Crisbel C
             </p>
@@ -164,3 +165,29 @@ if(window.location.pathname === '/'){
 }else{
     crearFooterHome();
 }
+
+//validar sesion iniciada
+document.addEventListener('DOMContentLoaded', () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const loginSection = document.querySelector('.login-section'); 
+    const userPanel = document.querySelector('.user-panel'); 
+
+    if (user) {
+            loginSection.classList.add('hidden');
+            loginSection.classList.remove('flex'); 
+        };
+
+        userPanel.classList.remove('hidden');
+        userPanel.classList.add('flex');
+
+        if(user.rol === 'admin'){
+                userPanel.innerHTML = `<a href="/panel-administrador" id="user-nombre" class="transition ease-in-out font-bold border-1 py-2 px-8 rounded-3xl hover:bg-verde text-white hover:border-verde"></a>`;
+            } else if(user.rol === 'instructor'){
+                userPanel.innerHTML = `<a href="/panel-instructor" id="user-nombre" class="transition ease-in-out font-bold border-1 py-2 px-8 rounded-3xl hover:bg-verde text-white hover:border-verde"></a>`;
+            } else if(user.rol === 'afiliado'){
+                userPanel.innerHTML = `<a href="/panel-usuario" id="user-nombre" class="transition ease-in-out font-bold border-1 py-2 px-8 rounded-3xl hover:bg-verde text-white hover:border-verde"></a>`;
+            }
+
+        document.querySelector('#user-nombre').textContent = user.nombre;
+    
+});

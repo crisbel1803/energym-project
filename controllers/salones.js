@@ -7,7 +7,7 @@ const salon = require('../models/salon')
 
 salonRouter.post('/',(request,response)=>{
     const { nombre, capacidad, descripcion, equipamiento, ubicacion, status} = request.body;  //esto es lo que estoy recibiendo del front 
-    console.log(nombre, capacidad, descripcion, equipamiento, ubicacion, status) //aqui pruebo si esta llegando el dato al backend
+    //console.log(nombre, capacidad, descripcion, equipamiento, ubicacion, status) //aqui pruebo si esta llegando el dato al backend
     //este console.log va a aparecer en la terminal de VS
 
 
@@ -27,7 +27,7 @@ salonRouter.post('/',(request,response)=>{
             await salon1.save() //aqui es donde guardo en la  bd
             //consultar todos los salons en ese modelo
             const listasalones = await salon.find()
-            console.log(listasalones) //terminal VS
+            //console.log(listasalones) //terminal VS
         }
 
         guardarsalon().catch(console.error)  
@@ -40,7 +40,7 @@ salonRouter.get('/lista-salones',async(request,response)=>{
     //obtener lista de salons 
     try{
         const listado = await salon.find()
-        console.log(listado)
+        //console.log(listado)
         return response.status(200).json({textOk:true,data:listado})
     }catch(error){
         return response.status(400).json({error:'Ha ocurrido un error'})
@@ -49,9 +49,9 @@ salonRouter.get('/lista-salones',async(request,response)=>{
 
 salonRouter.post('/actualizar',async (request,response)=>{
     //editar salon
-    console.log('edito')
+    //console.log('edito')
     const {nombre, capacidad, descripcion, equipamiento, ubicacion, status, id} = request.body;
-    console.log(request.body)
+    //console.log(request.body)
     try{    
             if(!nombre || !capacidad || !descripcion || !equipamiento || !ubicacion || !status || !id){
                 return response.status(400).json({error: 'Todos los campos son obligatorios'});
@@ -72,7 +72,7 @@ salonRouter.post('/actualizar',async (request,response)=>{
 salonRouter.post('/eliminar',async(request,res)=>{
     //eliminar salon del menu de salons
     const {id} = request.body
-    console.log('ID eliminado:', id)
+    //console.log('ID eliminado:', id)
 
     try{
         const salonEl = await salon.deleteOne({_id:id})
@@ -89,10 +89,10 @@ salonRouter.post('/eliminar',async(request,res)=>{
 salonRouter.get('/salon',async(req,response)=>{
     //obtener un salon
     const {id} = req.query
-    console.log('ID recibido:', id)
+    //console.log('ID recibido:', id)
     try{
         const salonEncontrado = await salon.findOne({_id : id})
-        console.log(salonEncontrado)
+        //console.log(salonEncontrado)
         return response.status(200).json({textOk:true,data:salonEncontrado})
     }catch(error){
         return response.status(400).json({error:'Ha ocurrido un error'})

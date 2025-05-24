@@ -7,14 +7,19 @@
     <script src="https://kit.fontawesome.com/09b2ffa585.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/styles/app.css">
     <link rel="stylesheet" href="/styles/styles.css">
+    <link rel="stylesheet" href="/styles/slider.css">
     <link rel="icon" type="image/x-icon" href="/images/favicon.png">
     <link href="https://fonts.cdnfonts.com/css/starzoom-shavian" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/tilt-neon" rel="stylesheet">
-    <script src="https://unpkg.com/scrollreveal"></script>
+
 </head>
 <body class="scroll-smooth fuenteTilt">
     <!--NAVBAR-->
     <header id="navegacion"></header>
+
+    <div id="preloader" class="fixed inset-0 bg-black flex justify-center items-center">
+      <i class="fa-solid fa-spinner text-verde text-6xl animate-spin"></i>
+    </div>
 
     <!--HERO HOME-->
     <section class="banner-home">
@@ -22,27 +27,65 @@
             <div class="w-2/3 mx-auto md:py-24 py-14 bounce-in-bottom">
                 <h2 class=" text-6xl md:text-7xl font-bold text-white text-center fuenteStar">¡Tu clase, tu ritmo, tu energia!</h2>
                 <h3 class=" text-4xl md:text-5xl font-bold text-verde text-center py-10">Tu espacio para moverte en grupo</h3>
-                <h4 class=" text-2xl md:text-3xl text-white text-center pb-6">La mayor variedad de clases grupales está en <span class="font-bold">ENERGYM</span>. Entrena, diviértete y únete a nuestra comunidad. ¡Consulta nuestro horario!</h4>
+                <h4 class=" text-2xl md:text-3xl text-white text-center pb-6">La mayor variedad de clases grupales para entrenar, divertirte y unirte a nuestra comunidad. ¡Consulta nuestro horario!</h4>
 
-                <div class="flex flex-col md:flex-row justify-center gap-8">
-                    <a href="#" class="transition ease-in-out font-bold border-1 py-2 px-8 rounded-3xl hover:bg-verde text-white hover:border-verde" id="btn-ver-popup">Ver Programación</a>
-                    <a href="#" class="heartbeat transition ease-in-out font-bold border-1 py-2 px-8 rounded-3xl bg-verde text-white border-verde">Ver clases</a>
+                <div class="flex flex-col md:flex-row justify-center gap-4">
+                    <a href="#" class="heartbeat transition ease-in-out font-bold border-1 py-2 px-8 rounded-3xl bg-verde text-white border-verde" id="btn-ver-popup">Ver Horarios</a>
+                    <a href="/ver-clases/" class="transition ease-in-out font-bold border-1 py-2 px-8 rounded-3xl bg-verde hover:bg-transparent text-white border-verde" id="btn-ver-popup">Ver Clases</a>
                 </div>
             </div>
         </div>
     </section> 
 
     <!--POPUP PROGRAMACION-->
-    <div class="popup hidden fixed top-0 left-0 w-screen h-screen bg-black/40 justify-center z-10">
-
-        <div class="md:w-2/4 w-3/4 bg-white my-auto p-12 in-vertical rounded-2xl">
+    <div class="popup hidden fixed top-0 left-0 w-screen h-screen bg-black/40 flex justify-center items-center z-10 overflow-y-auto">
+        <div class="bg-white my-auto p-6 md:p-12 rounded-2xl w-full max-w-lg md:max-w-2xl mx-4">
             <button id="cerrar-popup" class="text-end w-full pb-4"><i class="fa-solid fa-xmark text-2xl" style="color: #00c24f;"></i></button>
-            <h1 class="text-2xl text-black font-semibold text-center fuenteStar">PROGRAMACION DE ESTA SEMANA</h1>
-            <div id="calendar"></div>
+            <h1 class="text-2xl text-black font-semibold text-center fuenteStar mb-6">PROGRAMACION DE ESTA SEMANA</h1>
+            
+            <div class="overflow-x-auto rounded-lg shadow-md bg-gray-50"> <div id="calendar" class="banner-calendario p-2 min-w-[600px]"></div> </div>
 
         </div>
-
     </div>
+
+    <!--MODAL INFO DE CLASE-->
+    <div id="eventModal" class="modal hidden fixed z-50 left-0 top-0 w-full h-full bg-black/50 overflow-y-auto">
+                <div class="modal-content bg-white mx-auto mt-[10%] p-5 rounded-md text-center w-5/6 md:w-2/5">
+                    <button class="close text-end w-full cursor-pointer"><i class="fa-solid fa-xmark text-2xl" style="color: #00c24f;"></i></button>
+                    <h2 id="modalTitle" class="text-2xl uppercase fuenteStar pb-2 text-verde"></h2>
+                    <p class="text-xl fuenteStar"><span id="modalInstructor"></span></p>
+                    <p class="text-lg pb-2">Descripción: <span id="modalDescription"></span></p>
+                    <p class="text-lg pb-2"><span id="modalCapacidad"></span> Cupos</p>
+                    <p class="text-lg pb-2 text-verde"><span id="modalPrecio"></span>$</p>
+                    <table class="w-full text-sm text-center text-gray-700">
+                       <thead class="text-gray-700 uppercase bg-gray-50">
+                        <tr class="bg-verde text-white">
+                            <th>
+                                Inicio:
+                            </th>
+                            <th>
+                                Fin:
+                            </th>
+                            <th>
+                                Salón:
+                            </th>
+                        </tr>
+                       </thead>
+                       <tbody class="bg-white">
+                        <tr class="bg-gray-50">
+                            <td id="modalStart"></td>
+                            <td id="modalEnd"></td>
+                            <td id="modalRoom"></td>
+                        </tr>
+                       </tbody>
+                    </table>
+
+                    <!--reservar el evento seleccionado-->
+                    <div class="mt-4">
+                      <a id="btn-reservar-evento" class="bg-verde text-white p-2 rounded-2xl cursor-pointer">Reservar esta clase</a>
+                    </div>
+                </div>
+            </div>
 
     <!--WELCOME-->
     <section id="us-section" class="bg-gris py-30">
@@ -50,21 +93,27 @@
             <h2 class="text-white text-4xl font-bold mb-10 fuenteStar">Bienvenido A <span class="text-verde">ENERGYM</span></h2>
             <p class="text-gray-300 text-xl mb-10 max-w-xl mx-auto">Nos emociona tenerte aquí. Prepárate para descubrir una gran variedad de clases de salón diseñadas para todos los gustos y niveles. ¡Únete a nuestra comunidad y comienza hoy mismo a alcanzar tus metas!</p>
         </div>
-        <div class="flex flex-col md:flex-row gap-6 md:w-10/12 mx-auto">
-            <div class="cardreveal bg-green-900 p-12 text-center flex flex-col items-center md:min-h-[470px] justify-between md:w-1/3">
-                <img src="/images/equipo-icon.svg" width="100" height="200">
-                <h3 class="text-white text-2xl uppercase font-medium fuenteStar pt-4">Motivacion</h3>
-                <p class="text-gray-300 py-4">La energía contagiosa del instructor y los participantes te impulsará a superar tus límites y alcanzar tu máximo potencial. ¡Una experiencia vibrante y motivadora!</p>
+        <div class="flex flex-col md:flex-row gap-6 w-10/12 mx-auto"> 
+            <div class="cardreveal bg-gray-800 p-8 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 ease-in-out flex flex-col items-center md:min-h-[470px] justify-between md:w-1/3">
+                <div class="w-32 h-32 flex items-center justify-center rounded-full bg-verde/20 mb-4">
+                    <img src="/images/equipo-icon.svg" width="80" height="80" alt="Icono de Motivación">
+                </div>
+                <h3 class="text-white text-2xl uppercase font-bold fuenteStar pt-4">Motivacion</h3>
+                <p class="text-gray-300 py-4 text-center">La energía contagiosa del instructor y los participantes te impulsará a superar tus límites y alcanzar tu máximo potencial. ¡Una experiencia vibrante y motivadora!</p>
             </div>
-            <div class="cardreveal bg-green-900 p-12 text-center flex flex-col items-center md:min-h-[470px] justify-between md:w-1/3">
-                <img src="/images/yoga-icon.svg" width="100" height="200">
-                <h3 class="text-white text-2xl uppercase font-medium fuenteStar pt-4">Variedad</h3>
-                <p class="text-gray-300 py-4">Explora clases variadas como ritmos latinos, yoga y funcionales, asegurando rutinas emocionantes y desafiantes. ¡Siempre encontrarás algo nuevo para ti!</p>
+            <div class="cardreveal bg-gray-800 p-8 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 ease-in-out flex flex-col items-center md:min-h-[470px] justify-between md:w-1/3">
+                <div class="w-32 h-32 flex items-center justify-center rounded-full bg-verde/20 mb-4">
+                    <img src="/images/yoga-icon.svg" width="80" height="80" alt="Icono de Variedad">
+                </div>
+                <h3 class="text-white text-2xl uppercase font-bold fuenteStar pt-4">Variedad</h3>
+                <p class="text-gray-300 py-4 text-center">Explora clases variadas como ritmos latinos, yoga y funcionales, asegurando rutinas emocionantes y desafiantes. ¡Siempre encontrarás algo nuevo para ti!</p>
             </div>
-            <div class="cardreveal bg-green-900 p-12 text-center flex flex-col items-center md:min-h-[470px] justify-between md:w-1/3">
-                <img src="/images/instructor-icon.svg" width="100" height="200">
-                <h3 class="text-white text-2xl uppercase font-medium fuenteStar pt-4">Guia Pro</h3>
-                <p class="text-gray-300 py-4">Instructores certificados guían cada movimiento segura y efectivamente, ideal para principiantes con atención personalizada para evitar lesiones y optimizar resultados.</p>
+            <div class="cardreveal bg-gray-800 p-8 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 ease-in-out flex flex-col items-center md:min-h-[470px] justify-between md:w-1/3">
+                <div class="w-32 h-32 flex items-center justify-center rounded-full bg-verde/20 mb-4">
+                    <img src="/images/instructor-icon.svg" width="80" height="80" alt="Icono de Guía Pro">
+                </div>
+                <h3 class="text-white text-2xl uppercase font-bold fuenteStar pt-4">Guia Pro</h3>
+                <p class="text-gray-300 py-4 text-center">Instructores certificados guían cada movimiento segura y efectivamente, ideal para principiantes con atención personalizada para evitar lesiones y optimizar resultados.</p>
             </div>
         </div>
 
@@ -78,26 +127,25 @@
                 <p class="text-gray-300 text-xl mb-10 max-w-xl mx-auto">No necesitas ser afiliado para reservar tu espacio. ¡Disfruta de nuestras instalaciones y servicios sin membresía!</p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:px-6 pb-30">
-                <div class="transition ease-in-out cardreveal flex flex-col justify-center items-center min-h-72 text-center p-6 hover:scale-110 rounded-4xl" id="card-class-1">
-                    <h3 class="uppercase font-bold text-lg text-white fuenteStar">Combate y Defensa</h3>
-                    <p class="text-white font-medium py-5">Boxeo, Defensa Personal y Fit Combat</p>
-                    <a href="#" class="transition ease-in-out font-bold border-1 py-2 px-8 rounded-3xl hover:bg-verde text-white hover:border-verde">Ver clases</a>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 w-10/12 mx-auto px-4 py-10"> 
+                <div class="transition ease-in-out cardreveal flex flex-col justify-between items-center min-h-72 text-center p-6 bg-gray-900 rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 duration-300" id="card-class-1">
+                    <h3 class="uppercase font-bold text-xl text-white fuenteStar mb-4">Combate y Defensa</h3> 
+                    <p class="text-gray-300 font-medium text-lg py-5">Boxeo, Defensa Personal y Fit Combat</p> 
+                    <a href="/ver-clases/" class="transition ease-in-out font-bold border-2 border-verde py-2 px-8 rounded-3xl hover:bg-verde text-white mt-auto">Ver disciplinas</a> </div>
+                <div class="transition ease-in-out cardreveal flex flex-col justify-between items-center min-h-72 text-center p-6 bg-gray-900 rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 duration-300" id="card-class-2">
+                    <h3 class="uppercase font-bold text-xl text-white fuenteStar mb-4">Flexibilidad y Control</h3>
+                    <p class="text-gray-300 font-medium text-lg py-5">Pilates, Stretching y Yoga</p>
+                    <a href="/ver-clases/" class="transition ease-in-out font-bold border-2 border-verde py-2 px-8 rounded-3xl hover:bg-verde text-white mt-auto">Ver disciplinas</a>  
                 </div>
-                <div class="transition ease-in-out cardreveal flex flex-col justify-center items-center min-h-72 text-center p-6 hover:scale-110 rounded-4xl" id="card-class-2">
-                    <h3 class="uppercase font-bold text-lg text-white fuenteStar">Flexibilidad y Control</h3>
-                    <p class="text-white font-medium py-5">Pilates, Stretching y Yoga</p>
-                    <a href="#" class="transition ease-in-out font-bold border-1 py-2 px-8 rounded-3xl hover:bg-verde text-white hover:border-verde">Ver clases</a>   
+                <div class="transition ease-in-out cardreveal flex flex-col justify-between items-center min-h-72 text-center p-6 bg-gray-900 rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 duration-300" id="card-class-3">
+                    <h3 class="uppercase font-bold text-xl text-white fuenteStar mb-4">Cardio de Impacto</h3>
+                    <p class="text-gray-300 font-medium text-lg py-5">Spinning, Xtreme Bike y Training Bike</p>
+                    <a href="/ver-clases/" class="transition ease-in-out font-bold border-2 border-verde py-2 px-8 rounded-3xl hover:bg-verde text-white mt-auto">Ver disciplinas</a>
                 </div>
-                <div class="transition ease-in-out cardreveal flex flex-col justify-center items-center min-h-72 text-center p-6 hover:scale-110 rounded-4xl" id="card-class-3">
-                    <h3 class="uppercase font-bold text-lg text-white fuenteStar">Cardio de Impacto</h3>
-                    <p class="text-white font-medium py-5">Spinning, Xtreme Bike y Training Bike</p>
-                    <a href="#" class="transition ease-in-out font-bold border-1 py-2 px-8 rounded-3xl hover:bg-verde text-white hover:border-verde">Ver clases</a>
-                </div>
-                <div class="transition ease-in-out cardreveal flex flex-col justify-center items-center min-h-72 text-center p-6 hover:scale-110 rounded-4xl" id="card-class-4">
-                    <h3 class="uppercase font-bold text-lg text-white fuenteStar">Ritmo y Energía</h3>
-                    <p class="text-white font-medium py-5">Baile, Zumba y Step</p>
-                    <a href="#" class="transition ease-in-out font-bold border-1 py-2 px-8 rounded-3xl hover:bg-verde text-white hover:border-verde">Ver clases</a>
+                <div class="transition ease-in-out cardreveal flex flex-col justify-between items-center min-h-72 text-center p-6 bg-gray-900 rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 duration-300" id="card-class-4">
+                    <h3 class="uppercase font-bold text-xl text-white fuenteStar mb-4">Ritmo y Energía</h3>
+                    <p class="text-gray-300 font-medium text-lg py-5">Baile, Zumba y Step</p>
+                    <a href="/ver-clases/" class="transition ease-in-out font-bold border-2 border-verde py-2 px-8 rounded-3xl hover:bg-verde text-white mt-auto">Ver disciplinas</a>
                 </div>
             </div>
         </div>
@@ -110,13 +158,13 @@
             <p class="text-gray-300 text-xl mb-10 max-w-xl mx-auto">En ENERGYM, nuestros instructores profesionales te guiarán con experiencia y pasión para alcanzar tus metas. ¡Entrena con los mejores!</p>
         </div>
         <div>
-            <div class="grid grid-cols-1 md:grid-cols-2 md:grid-rows-7 gap-4 md:px-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 md:grid-rows-7 gap-4 w-10/12 mx-auto">
                 <div class="transition ease-in-out cardreveal md:row-span-3 bg-gray-800 flex hover:bg-gris">
                     <div id="coach-card-1" class="min-w-1/3"></div>
                     <div class="flex flex-col justify-center gap-3 p-8">
                         <h3 class="transition ease-in-out text-xl uppercase text-white hover:text-verde font-bold">Evan Leon</h3>
                         <p class="text-verde uppercase font-medium">boxeo</p>
-                        <p class="text-gray-300">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure itaque corrupti provident?</p>
+                        <p class="text-gray-300">Boxeador experto que inspira, enseña técnica depurada y forja campeones con disciplina.</p>
                         <ul class="flex gap-3">
                             <li><a href="https://www.facebook.com/"><i class="fa-brands fa-square-facebook" style="color: #ffffff;"></i></a></li>
                             <li><a href="#"><i class="fa-brands fa-tiktok" style="color: #ffffff;"></i></a></li>
@@ -129,7 +177,7 @@
                     <div class="flex flex-col justify-center gap-3 p-8">
                         <h3 class="transition ease-in-out text-xl uppercase text-white hover:text-verde font-bold">Gab Pérez</h3>
                         <p class="text-verde uppercase font-medium">baile</p>
-                        <p class="text-gray-300">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure itaque corrupti provident?</p>
+                        <p class="text-gray-300">Bailarina virtuosa que contagia pasión, enseña con gracia y libera el movimiento.</p>
                         <ul class="flex gap-3">
                             <li><a href="https://www.facebook.com/"><i class="fa-brands fa-square-facebook" style="color: #ffffff;"></i></a></li>
                             <li><a href="#"><i class="fa-brands fa-tiktok" style="color: #ffffff;"></i></a></li>
@@ -142,7 +190,7 @@
                     <div class="flex flex-col justify-center gap-3 p-8">
                         <h3 class="transition ease-in-out text-xl uppercase text-white hover:text-verde font-bold">Ana Castillo</h3>
                         <p class="text-verde uppercase font-medium">pilates</p>
-                        <p class="text-gray-300">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure itaque corrupti provident?</p>
+                        <p class="text-gray-300">Experta en pilates, guía de movimiento consciente, fortalece cuerpo y mente con precisión.</p>
                         <ul class="flex gap-3">
                             <li><a href="https://www.facebook.com/"><i class="fa-brands fa-square-facebook" style="color: #ffffff;"></i></a></li>
                             <li><a href="#"><i class="fa-brands fa-tiktok" style="color: #ffffff;"></i></a></li>
@@ -155,7 +203,7 @@
                     <div class="flex flex-col justify-center gap-3 p-8">
                         <h3 class="transition ease-in-out text-xl uppercase text-white hover:text-verde font-bold">Sam Veliz</h3>
                         <p class="text-verde uppercase font-medium">spinning</p>
-                        <p class="text-gray-300">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure itaque corrupti provident?</p>
+                        <p class="text-gray-300">Líder enérgica, guía de ritmo intenso, motiva al límite, transforma esfuerzo en logro.</p>
                         <ul class="flex gap-3">
                             <li><a href="https://www.facebook.com/"><i class="fa-brands fa-square-facebook" style="color: #ffffff;"></i></a></li>
                             <li><a href="#"><i class="fa-brands fa-tiktok" style="color: #ffffff;"></i></a></li>
@@ -168,29 +216,68 @@
 
     </section>
 
-    <!--PLANES CARDS-->
-    <section id="planes-section">
-        <div class="text-center cardreveal pt-30">
-            <h2 class="text-verde text-5xl font-bold mb-10 fuenteStar">Planes</h2>
-            <p class="text-gray-300 text-xl mb-10 max-w-xl mx-auto">Encuentra el plan perfecto para ti. Opciones accesibles para cada estilo y presupuesto</p>
-        </div>
+    
 
-        <div class="grid md:grid-cols-3 grid-cols-1 w-10/12 mx-auto py-24">
-            <div>
-                
+    <!--HORARIO SEMANA-->
+    <section id="horario-section"> 
+        <div class="bg-black py-30"> 
+            <div class="text-center cardreveal px-4"> 
+                <h2 class="text-white text-5xl font-bold mb-10 fuenteStar">Horario <span class="text-verde text-4xl">Semanal</span></h2>
+                <p class="text-gray-300 text-xl mb-10 max-w-xl mx-auto">Consulta nuestro horario semanal y encuentra la clase perfecta para ti. ¡No te lo pierdas!</p>
+            </div>
+
+            <div class="flex flex-col items-center w-full px-4"> 
+                <div class="w-full max-w-10/12 overflow-x-auto rounded-2xl shadow-lg mt-10 bg-white"> 
+                    <div id="calendar2" class="banner-calendario md:p-10 p-4 min-w-[700px]"></div> 
+                </div>
             </div>
         </div>
     </section>
 
-    <!--HORARIO SEMANA-->
-    <section>
-
-    </section>  
-
     <!--TESTIMONIOS SLIDER-->
-    <section>
+    
+   <section class="bg-gris py-30 relative">
+    <div class="text-center">
+        <h2 class="text-white text-5xl font-bold mb-10 fuenteStar">Lo que dicen nuestros <span class="text-verde text-4xl">Clientes</span></h2>
+        <p class="text-gray-300 text-xl mb-10 max-w-xl mx-auto">Descubre lo que nuestros clientes dicen sobre su experiencia en ENERGYM. ¡Únete a nuestra comunidad y vive la energía!</p>
+    </div>
 
-    </section>
+    <div class="relative w-10/12 mx-auto overflow-hidden">
+        <div id="slider" class="flex transition-transform duration-500 ease-in-out">
+            <!-- Testimonio 1 -->
+            <div class="bg-verde/20 hover:bg-verde/30 rounded-2xl p-12 text-center flex flex-col items-center min-w-full">
+                <i class="fa-solid fa-user text-white text-6xl mb-4"></i>
+                <h3 class="text-white text-2xl uppercase font-medium fuenteStar pt-4">Maria Lopez</h3>
+                <p class="text-gray-300 py-4">"ENERGYM ha transformado mi vida. Las clases son increíbles y los instructores son muy motivadores. ¡Me encanta!"</p>
+            </div>
+
+            <!-- Testimonio 2 -->
+            <div class="bg-verde/20 hover:bg-verde/30 rounded-2xl p-12 text-center flex flex-col items-center min-w-full">
+                <i class="fa-solid fa-user text-white text-6xl mb-4"></i>
+                <h3 class="text-white text-2xl uppercase font-medium fuenteStar pt-4">Carlos Perez</h3>
+                <p class="text-gray-300 py-4">"Las clases de spinning son lo mejor. La energía del grupo es contagiosa y siempre salgo con una sonrisa."</p>
+            </div>
+
+            <!-- Testimonio 3 -->
+            <div class="bg-verde/20 hover:bg-verde/30 rounded-2xl p-12 text-center flex flex-col items-center min-w-full">
+                <i class="fa-solid fa-user text-white text-6xl mb-4"></i>
+                <h3 class="text-white text-2xl uppercase font-medium fuenteStar pt-4">Ana Torres</h3>
+                <p class="text-gray-300 py-4">"Las clases de yoga me han ayudado a encontrar equilibrio y paz. Los instructores son muy atentos y profesionales."</p>
+            </div>
+        </div>
+
+        <!-- Botones de Navegación -->
+        <button id="prevBtn" class="absolute top-1/2 left-2 bg-verde/20 text-white p-4 rounded-full hover:bg-verde/30">❮</button>
+        <button id="nextBtn" class="absolute top-1/2 right-2 bg-verde/20 text-white p-4 rounded-full hover:bg-verde/30">❯</button>
+
+        <!-- Indicadores -->
+        <div id="indicators" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-3">
+            <span class="indicator bg-white w-4 h-4 rounded-full cursor-pointer"></span>
+            <span class="indicator bg-gray-500 w-4 h-4 rounded-full cursor-pointer"></span>
+            <span class="indicator bg-gray-500 w-4 h-4 rounded-full cursor-pointer"></span>
+        </div>
+    </div>
+</section>
     
     <!--BOTON SCROLL UP-->
     <button id="scrollUpBtn" title="Ir arriba">
@@ -200,11 +287,15 @@
     <!--FOOTER-->
     <footer class="bg-black" id="footer"></footer>
     
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js'></script>
-    <script src="/panel-administrador/js/calendar.js"></script>
     <script src="index.js"></script>
+    <script src="slider.js"></script>
+    <script src="calendario-landing.js"></script>
     <script src="/components/nav.js"></script>
-    <script src="/components/popup.js"></script>
+    <script src="/components/popup.js"></script>    
+    <script src="/components/preloader.js"></script>
     <script src="/components/footer.js"></script>
     <script src="/components/button-scroll-up.js"></script>
     <script src="/components/scrollreveal.js"></script>

@@ -1,89 +1,160 @@
-const nombreDisciplina = document.querySelector('#nombre-disciplina');
-const descripcionDisciplina = document.querySelector('#descripcion-disciplina');
-const duracionDisciplina = document.querySelector('#duracion-disciplina');
-const nivelDisciplina = document.querySelector('#nivel-disciplina');
-const capacidadDisciplina = document.querySelector('#capacidad-disciplina');
-const precioDisciplina = document.querySelector('#precio-disciplina');
-const statusDisciplina = document.querySelector('#status-disciplina');
+const formularioDisciplina = document.querySelector('#form-disciplina');
 const notificacion = document.querySelector('.notificacion');
+const user = JSON.parse(localStorage.getItem('user'));
 
+const nombreDisciplinaInput = document.querySelector('#nombre-disciplina');
+const descripcionDisciplinaInput = document.querySelector('#descripcion-disciplina');
+const duracionDisciplinaInput = document.querySelector('#duracion-disciplina');
+const nivelDisciplinaSelect = document.querySelector('#nivel-disciplina');
+const statusDisciplinaSelect = document.querySelector('#status-disciplina');
+const imgDiscUploadInput = document.querySelector('#imagen-disciplina-upload');
+const contImagenAct = document.querySelector('#cont-img-act');
 
-document.addEventListener('DOMContentLoaded', async ()=>{
-    //consultar en la url para extraer y guardar el id que enviamos en la ruta
-    const parametrosURL = new URLSearchParams(window.location.search);
-    const id = parametrosURL.get('id');
+let disciplinaId;
+let nombreDiscAct = '';
 
-    console.log(id)
+if (!user) {
+    window.location.href = '/';
+}
 
-    if (!id) {
-        notificacion.innerHTML = 'Disciplina no encontrada'
-        notificacion.classList.remove('hidden', 'text-green-600')
-        notificacion.classList.add('block', 'text-red-600')
+document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    disciplinaId = urlParams.get('id');
 
-        setTimeout(()=>{
-            notificacion.classList.remove('block')
-            notificacion.classList.add('hidden')
-        }, 2000)
+    if (disciplinaId) {
+        cargarDisciplina(disciplinaId);
+    } else {
+        mostrarNotificacion('No se encontró el ID de la disciplina.', 'error');
     }
+});
 
-    const response = await axios.get(`/api/disciplinas/disciplina?id=${id}` )
-    const disciplina = response.data.data
+formularioDisciplina.addEventListener('submit', validarYActDisciplina);
 
-    //console.log(disciplina)
-    
-    mostrarDisciplina(disciplina);
+async function cargarDisciplina(id) {
+    try {
+        const response = await axios.get(`/api/disciplinas/disciplina?id=${id}`);
+        const disciplina = response.data.data;
 
-    //hacer el registro desde el formulario
-    const formulario = document.querySelector('#form-disciplina');
-    formulario.addEventListener('submit',validarDisciplina)
+        if (disciplina) {
+            nombreDisciplinaInput.value = disciplina.nombre;
+            descripcionDisciplinaInput.value = disciplina.descripcion;
+            duracionDisciplinaInput.value = disciplina.duracion;
+            nivelDisciplinaSelect.value = disciplina.nivel;
+            statusDisciplinaSelect.value = disciplina.status;
 
-})
+            if (disciplina.imagen) {
+                nombreDiscAct = disciplina.imagen;
+                const imgElement = document.createElement('img');
+                imgElement.src = `/data/uploads/${disciplina.imagen}`;
+                imgElement.alt = `Imagen de ${disciplina.nombre}`;
+                imgElement.classList.add('w-full', 'h-48', 'object-cover', 'rounded-md', 'mb-2');
+                contImagenAct.innerHTML = '';
+                contImagenAct.appendChild(imgElement);
+            } else {
+                contImagenAct.innerHTML = '<p class="text-gray-500">No hay imagen actual.</p>';
+            }
+        } else {
+            mostrarNotificacion('Disciplina no encontrada.', 'error');
+        }
+    } catch (error) {
+        console.error('Error al cargar la disciplina:', error);
+        mostrarNotificacion('Error al cargar la disciplina. Inténtalo de nuevo.', 'error');
+    }
+}
 
-async function validarDisciplina(e){
+async function validarYActDisciplina(e) {
     e.preventDefault();
-    const parametrosURL = new URLSearchParams(window.location.search);
-    const id = parametrosURL.get('id');
-    console.log(id)
-    
-    const disciplinaAct = {
-        nombre: nombreDisciplina.value,
-        descripcion: descripcionDisciplina.value,
-        duracion: parseInt(duracionDisciplina.value),
-        nivel: nivelDisciplina.value,
-        capacidad: parseInt(capacidadDisciplina.value),
-        precio: parseInt(precioDisciplina.value),
-        status: statusDisciplina.value,
-        id: id
+
+    const nombre = nombreDisciplinaInput.value;
+    const descripcion = descripcionDisciplinaInput.value;
+    const duracion = duracionDisciplinaInput.value;
+    const nivel = nivelDisciplinaSelect.value;
+    const status = statusDisciplinaSelect.value;
+    const nuevaImgFile = imgDiscUploadInput.files[0];
+
+    const disciplinaData = {
+        nombre,
+        descripcion,
+        duracion,
+        nivel,
+        status,
+    };
+
+    if (validar(disciplinaData)) {
+        mostrarNotificacion('Todos los campos son obligatorios', 'error');
+        return;
     }
 
-    if(validar(disciplinaAct)){
-        notificacion.innerHTML = 'Todos los campos son obligatorios'
-        notificacion.classList.remove('hidden', 'text-green-600')
-        notificacion.classList.add('block', 'text-red-600')
+    let imgaAct = nombreDiscAct;
 
-        setTimeout(()=>{
-            notificacion.classList.remove('block')
-            notificacion.classList.add('hidden')
-        }, 2000)
+    if (nuevaImgFile) {
+        const formData = new FormData();
+        formData.append('disciplineImage', nuevaImgFile);
+
+        try {
+            const response = await axios.post('/api/disciplinas/upload-image', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            if (response.data.success) {
+                imgaAct = response.data.filename; 
+                mostrarNotificacion('Nueva imagen subida con éxito.', 'success');
+            } else {
+                mostrarNotificacion('Error al subir la nueva imagen. Inténtalo de nuevo.', 'error');
+                console.error('Error al subir la imagen:', response.data.message);
+                return;
+            }
+        } catch (error) {
+            mostrarNotificacion('Error de red al subir la imagen.', 'error');
+            console.error('Error en la solicitud de subida de imagen:', error);
+            return;
+        }
     }
-    console.log(disciplinaAct)
-    await axios.post('/api/disciplinas/actualizar',disciplinaAct); 
-    window.location.href = '/panel-administrador'
+
+    try {
+        const response = await axios.post('/api/disciplinas/actualizar', {
+            id: disciplinaId,
+            nombre,
+            descripcion,
+            duracion,
+            nivel,
+            status,
+            imagen: imgaAct 
+        });
+
+        if (response.status === 200) {
+            mostrarNotificacion('Disciplina actualizada con éxito!', 'success');
+            setTimeout(() => {
+                window.location.href = "/panel-administrador";
+            }, 1500);
+        } else {
+            mostrarNotificacion('Error al actualizar la disciplina.', 'error');
+            console.error('Respuesta del servidor al actualizar:', response.data);
+        }
+    } catch (error) {
+        mostrarNotificacion('Error al actualizar la disciplina. Inténtalo de nuevo.', 'error');
+        console.error('Error en la solicitud de actualización de disciplina:', error);
+    }
 }
 
-function mostrarDisciplina(disciplina){
-    //muestra los datos de la disciplina en la interfaz de editar
-    const { nombre, descripcion, duracion, nivel, capacidad, precio, status} = disciplina;
-
-    nombreDisciplina.value= nombre,
-    descripcionDisciplina.value= descripcion,
-    duracionDisciplina.value= duracion,
-    nivelDisciplina.value= nivel,
-    capacidadDisciplina.value= capacidad,
-    precioDisciplina.value= precio,
-    statusDisciplina.value= status
+function validar(obj) {
+    return !Object.values(obj).every(i => i !== '' && i !== null); 
 }
 
-function validar(objeto){
-    return !Object.values(objeto).every(element=>element!=='')
+function mostrarNotificacion(mensaje, tipo) {
+    notificacion.innerHTML = mensaje;
+    notificacion.classList.remove('hidden', 'text-green-600', 'text-red-600');
+    notificacion.classList.add('block');
+
+    if (tipo === 'success') {
+        notificacion.classList.add('text-green-600');
+    } else if (tipo === 'error') {
+        notificacion.classList.add('text-red-600');
+    }
+
+    setTimeout(() => {
+        notificacion.classList.remove('block', 'text-green-600', 'text-red-600');
+        notificacion.classList.add('hidden');
+    }, 3000);
 }

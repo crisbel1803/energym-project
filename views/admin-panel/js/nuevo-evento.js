@@ -63,6 +63,8 @@ async function validarEvento(e){
     const finEvento = document.querySelector('#fin-evento').value;
     const salonEvento = document.querySelector('#salon-evento').value;
     const instructorEvento = document.querySelector('#instructor-evento').value;
+    const capacidadEvento = document.querySelector('#capacidad-evento').value;
+    const precioEvento = document.querySelector('#precio-evento').value;
 
     const evento = {
         tituloEvento,
@@ -71,6 +73,8 @@ async function validarEvento(e){
         finEvento,
         salonEvento,
         instructorEvento,
+        capacidadEvento,
+        precioEvento,
 
     }
 
@@ -86,10 +90,12 @@ async function validarEvento(e){
         }, 2000)
 
     }else{
-        const evento = await axios.post('/api/eventos',{title:tituloEvento,description:descripcionEvento,start:inicioEvento,end:finEvento,room:salonEvento,instructor:instructorEvento})
+        const evento = await axios.post('/api/eventos',{title:tituloEvento,description:descripcionEvento,start:inicioEvento,end:finEvento,room:salonEvento,instructor:instructorEvento,capacidad:capacidadEvento,precio:precioEvento})
         console.log(evento)
         const arrayEventos = evento.data.lista
         window.location.href = "/panel-administrador/horario-semanal.html"
+        calendar.addEventSource(arrayEventos);
+
     }
 
 }

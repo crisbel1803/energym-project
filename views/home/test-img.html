@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENERGYM | Fitness Club</title>
+    <script src="https://kit.fontawesome.com/09b2ffa585.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/styles/app.css">
+    <link rel="stylesheet" href="/styles/styles.css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.png">
+    <link href="https://fonts.cdnfonts.com/css/starzoom-shavian" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/tilt-neon" rel="stylesheet">
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</head>
+<body class="scroll-smooth fuenteTilt">
+    <!--NAVBAR-->
+    <header id="navegacion"></header>
+    
+
+
+    <form action="/stats" enctype="multipart/form-data" method="post">
+    <div class="form-group">
+        <input type="file" class="form-control-file" name="uploaded_file">
+        <input type="text" class="form-control" placeholder="Number of speakers" name="nspeakers">
+        <input type="submit" value="Get me the stats!" class="btn btn-default">
+    </div>
+    </form>
+
+    
+
+
+    <footer class="bg-black" id="footer"></footer>
+    
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js'></script>
+    <script src="/components/nav.js"></script>
+    <script src="/components/footer.js"></script>
+    <script src="/components/scrollreveal.js"></script>
+
+</body>
+</html>

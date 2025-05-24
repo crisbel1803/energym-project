@@ -4,6 +4,8 @@ const inicioEvento = document.querySelector('#inicio-evento');
 const finEvento = document.querySelector('#fin-evento');
 const salonEvento = document.querySelector('#salon-evento');
 const instructorEvento = document.querySelector('#instructor-evento');
+const capacidadEvento = document.querySelector('#capacidad-evento');
+const precioEvento = document.querySelector('#precio-evento');
 const notificacion = document.querySelector('.notificacion');
 
 document.addEventListener('DOMContentLoaded', async ()=>{
@@ -59,7 +61,7 @@ document.addEventListener('DOMContentLoaded', async ()=>{
     const parametrosURL = new URLSearchParams(window.location.search);
     const id = parametrosURL.get('id');
 
-    console.log(id)
+    //console.log(id)
 
     if (!id) {
         notificacion.innerHTML = 'Evento no encontrado'
@@ -99,6 +101,8 @@ async function validarEvento(e){
         end: finEvento.value,
         room: salonEvento.value,
         instructor: instructorEvento.value,
+        capacidad: capacidadEvento.value,
+        precio: precioEvento.value,
         id: id
     }
 
@@ -121,8 +125,8 @@ async function validarEvento(e){
 
 function mostrarEvento(evento){
     //muestra los datos del evento en la interfaz de editar
-    console.log(evento)
-    const { title, description, start, end, room, instructor} = evento;
+    //console.log(evento)
+    const { title, description, start, end, room, instructor, capacidad, precio} = evento;
 
     //formateo de fecha para mostrarla en el formulario
    function formatoFecha(fecha) {
@@ -143,6 +147,8 @@ function mostrarEvento(evento){
     finEvento.value= finFormato,
     salonEvento.value= room,
     instructorEvento.value= instructor
+    capacidadEvento.value= capacidad
+    precioEvento.value= precio
 
 }
 

@@ -7,7 +7,7 @@ const instructor = require('../models/instructor')
 
 instructorRouter.post('/',(request,response)=>{
     const { nombre, apellido, cedula, telefono, email, especialidades } = request.body;  //esto es lo que estoy recibiendo del front 
-    console.log(nombre, apellido, cedula, telefono, email, especialidades) //aqui pruebo si esta llegando el dato al backend
+    //console.log(nombre, apellido, cedula, telefono, email, especialidades) //aqui pruebo si esta llegando el dato al backend
     //este console.log va a aparecer en la terminal de VS
 
 
@@ -27,7 +27,7 @@ instructorRouter.post('/',(request,response)=>{
             await instructor1.save() //aqui es donde guardo en la  bd
             //consultar todos los instructores en ese modelo
             const listainstructores = await instructor.find()
-            console.log(listainstructores) //terminal VS
+           // console.log(listainstructores) //terminal VS
         }
 
         guardarinstructor().catch(console.error)  
@@ -40,7 +40,7 @@ instructorRouter.get('/lista-instructores',async(request,response)=>{
     //obtener lista de instructores 
     try{
         const listado = await instructor.find()
-        console.log(listado)
+        //console.log(listado)
         return response.status(200).json({textOk:true,data:listado})
     }catch(error){
         return response.status(400).json({error:'Ha ocurrido un error'})
@@ -49,9 +49,9 @@ instructorRouter.get('/lista-instructores',async(request,response)=>{
 
 instructorRouter.post('/actualizar',async (request,response)=>{
     //editar instructor
-    console.log('edito')
+    //console.log('edito')
     const {nombre, apellido, cedula, telefono, email, especialidades, id} = request.body;
-    console.log(request.body)
+    //console.log(request.body)
     try{    
             if(!nombre || !apellido || !cedula || !telefono || !email || !id){
                 return response.status(400).json({error: 'Todos los campos son obligatorios'});
@@ -72,7 +72,7 @@ instructorRouter.post('/actualizar',async (request,response)=>{
 instructorRouter.post('/eliminar',async(request,res)=>{
     //eliminar instructor del menu de instructores
     const {id} = request.body
-    console.log(id)
+    //console.log(id)
 
     try{
         const instructorEl = await instructor.deleteOne({_id:id})
@@ -89,7 +89,7 @@ instructorRouter.post('/eliminar',async(request,res)=>{
 instructorRouter.get('/instructor',async(req,response)=>{
     //obtener un instructor
     const {id} = req.query
-    console.log('ID recibido:', id)
+    //console.log('ID recibido:', id)
     try{
         const instEncontrado = await instructor.findOne({_id : id})
         console.log(instEncontrado)

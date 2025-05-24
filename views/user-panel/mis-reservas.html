@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Reservas | ENERGYM</title>
+    <script src="https://kit.fontawesome.com/09b2ffa585.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/styles/app.css">
+    <link rel="stylesheet" href="/styles/styles.css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.png">
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <link href="https://fonts.cdnfonts.com/css/starzoom-shavian" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/tilt-neon" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body class="fuenteTilt min-h-screen bg-gris">
+    <div id="navegacion"></div>
+
+    <div id="preloader" class="fixed inset-0 bg-black flex justify-center items-center">
+      <i class="fa-solid fa-spinner text-verde text-6xl animate-spin"></i>
+    </div>
+
+    <section class="md:ml-40 pt-10 bg-gris pb-10">
+        <div class="flex flex-row justify-end w-4/5 mx-auto px-4">
+            <a href="#" class="flex flex-row gap-2 items-center transition ease-in-out font-bold border-1 py-2 px-8 rounded-3xl hover:bg-verde text-white hover:border-verde">
+                <i class="fa-solid fa-user"></i><span id="btn-user" class="capitalize"></span>
+            </a>
+        </div>
+
+        <h1 class="text-4xl font-semibold text-center py-10 fuenteStar text-white">
+            <span class="text-verde text-5xl">Control</span> de mis reservas
+        </h1>
+
+        <div class="flex flex-col items-center px-4">
+            <div id="misReservas" class="text-gray-700 bg-white p-6 md:p-8 rounded-xl shadow-lg w-full max-w-6xl overflow-hidden mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800">Mis Reservas</h2>
+                
+                <p class="notificacion hidden border-2 p-4 text-center rounded-2xl mb-4"></p>
+
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-600 uppercase tracking-wider rounded-tl-lg">Fecha de Reserva</th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-600 uppercase tracking-wider">Clase</th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-600 uppercase tracking-wider">Fecha Clase</th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-600 uppercase tracking-wider">Hora Clase</th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-600 uppercase tracking-wider">Costo</th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-600 uppercase tracking-wider">Status de Pago</th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-600 uppercase tracking-wider">Status Reserva</th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-600 uppercase tracking-wider">Confirmación de Pago</th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-600 uppercase tracking-wider rounded-tr-lg">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="listaReservas" class="bg-white divide-y divide-gray-200">
+                            </tbody>
+                    </table>
+                </div>
+                <div id="noReservasMessage" class="hidden text-center py-8 text-gray-500">
+                    <p class="text-lg">No tienes reservas para mostrar en este momento.</p>
+                    <i class="fa-solid fa-calendar-xmark text-4xl mt-4"></i>
+                </div>
+            </div> 
+        </div>
+    </section>
+
+    <section class="md:ml-40 pt-10 bg-gris pb-10">
+        <div class="flex flex-col items-center px-4">
+            <div class="text-gray-700 bg-white p-6 md:p-8 rounded-xl shadow-lg w-full max-w-6xl">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800">Resumen de Compra</h2>
+                <p class="notificacion-resumen hidden border-2 p-4 text-center rounded-2xl mb-4"></p>
+                <div id="resumenCompra" class="min-h-[100px] flex flex-col justify-between">
+                    </div>
+                <div id="noResumenMessage" class="hidden text-center py-8 text-gray-500">
+                    <p class="text-lg">Añade reservas al carrito para ver el resumen de pago.</p>
+                    <i class="fa-solid fa-cart-shopping text-4xl mt-4"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://www.paypal.com/sdk/js?client-id=AbM2HKLGkFkZz0MtG8gdBjLcgCHkgxY8nlDojoLNR5Xi-iLqlqDrBvkqBmW10bxH-7CTerSk3W-bdufD&currency=USD"></script>
+
+
+    <script src="mis-reservas.js"></script>
+    <script src="/components/nav-admin.js"></script>    
+    <script src="/components/preloader.js"></script>
+</body>
+</html>
