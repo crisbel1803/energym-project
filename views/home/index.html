@@ -169,70 +169,78 @@
         </div>
     </section>
 
-    <!--INSTRUCTORES CARDS-->
+<!--INSTRUCTORES CARDS-->
     <section id="us-section" class="bg-gris py-30">
         <div class="text-center cardreveal">
             <h2 class="text-white text-5xl font-bold mb-10 fuenteStar">Nuestros <span class="text-verde text-4xl">Instructores</span></h2>
             <p class="text-gray-300 text-xl mb-10 max-w-xl mx-auto">En ENERGYM, nuestros instructores profesionales te guiarán con experiencia y pasión para alcanzar tus metas. ¡Entrena con los mejores!</p>
         </div>
-        <div>
-            <div class="grid grid-cols-1 md:grid-cols-2 md:grid-rows-7 gap-4 w-10/12 mx-auto">
-                <div class="transition ease-in-out cardreveal md:row-span-3 bg-gray-800 flex hover:bg-gris">
-                    <div id="coach-card-1" class="min-w-1/3"></div>
-                    <div class="flex flex-col justify-center gap-3 p-8">
-                        <h3 class="transition ease-in-out text-xl uppercase text-white hover:text-verde font-bold">Evan Leon</h3>
-                        <p class="text-verde uppercase font-medium">boxeo</p>
-                        <p class="text-gray-300">Boxeador experto que inspira, enseña técnica depurada y forja campeones con disciplina.</p>
-                        <ul class="flex gap-3">
-                            <li><a href="https://www.facebook.com/"><i class="fa-brands fa-square-facebook" style="color: #ffffff;"></i></a></li>
-                            <li><a href="#"><i class="fa-brands fa-tiktok" style="color: #ffffff;"></i></a></li>
-                            <li><a href="#"><i class="fa-brands fa-instagram" style="color: #ffffff;"></i></a></li>
+        <div class="container mx-auto px-4 w-10/12">
+            <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10"> <!--Ajustado sm:grid-cols-1 para mejor visualización con imagen lateral en pantallas medianas antes de pasar a 2 columnas en lg-->
+
+                <div class="transition-all duration-300 ease-in-out cardreveal bg-gray-800 rounded-xl shadow-lg overflow-hidden flex flex-col md:flex-row hover:shadow-2xl hover:transform hover:-translate-y-2">
+                    <div id="coach-card-1" class="w-full md:w-2/5 h-80 md:h-auto bg-gray-700 bg-cover bg-center">
+                        </div>
+                    
+                    <div class="p-6 flex flex-col flex-grow md:w-3/5">
+                        <h3 class="text-2xl uppercase text-white group-hover:text-verde font-bold mb-1 transition-colors duration-200 hover:text-verde">Evan Leon</h3>
+                        <p class="text-verde uppercase font-semibold text-sm mb-3">Boxeo</p>
+                        <p class="text-gray-300 text-base leading-relaxed mb-5 flex-grow">Boxeador experto que inspira, enseña técnica depurada y forja campeones con disciplina.</p>
+                        <ul class="flex gap-4 items-center mt-auto">
+                            <li><a href="https://www.facebook.com/" aria-label="Facebook de Evan Leon" class="text-gray-400 hover:text-verde transition-colors duration-200"><i class="fa-brands fa-square-facebook text-2xl"></i></a></li>
+                            <li><a href="#" aria-label="TikTok de Evan Leon" class="text-gray-400 hover:text-verde transition-colors duration-200"><i class="fa-brands fa-tiktok text-2xl"></i></a></li>
+                            <li><a href="#" aria-label="Instagram de Evan Leon" class="text-gray-400 hover:text-verde transition-colors duration-200"><i class="fa-brands fa-instagram text-2xl"></i></a></li>
                         </ul>
                     </div>
                 </div>
-                <div class="transition ease-in-out cardreveal md:row-span-3 md:col-start-2 md:row-start-2 bg-gray-800 flex hover:bg-gris">
-                    <div id="coach-card-2" class="min-w-1/3"></div>
-                    <div class="flex flex-col justify-center gap-3 p-8">
-                        <h3 class="transition ease-in-out text-xl uppercase text-white hover:text-verde font-bold">Gab Pérez</h3>
-                        <p class="text-verde uppercase font-medium">baile</p>
-                        <p class="text-gray-300">Bailarina virtuosa que contagia pasión, enseña con gracia y libera el movimiento.</p>
-                        <ul class="flex gap-3">
-                            <li><a href="https://www.facebook.com/"><i class="fa-brands fa-square-facebook" style="color: #ffffff;"></i></a></li>
-                            <li><a href="#"><i class="fa-brands fa-tiktok" style="color: #ffffff;"></i></a></li>
-                            <li><a href="#"><i class="fa-brands fa-instagram" style="color: #ffffff;"></i></a></li>
+
+                <div class="transition-all duration-300 ease-in-out cardreveal bg-gray-800 rounded-xl shadow-lg overflow-hidden flex flex-col md:flex-row hover:shadow-2xl hover:transform hover:-translate-y-2">
+                    <div id="coach-card-2" class="w-full md:w-2/5 h-80 md:h-auto bg-gray-700 bg-cover bg-center"></div>
+                    <div class="p-6 flex flex-col flex-grow md:w-3/5">
+                        <h3 class="text-2xl uppercase text-white hover:text-verde font-bold mb-1 transition-colors duration-200">Gab Pérez</h3>
+                        <p class="text-verde uppercase font-semibold text-sm mb-3">Baile</p>
+                        <p class="text-gray-300 text-base leading-relaxed mb-5 flex-grow">Bailarina virtuosa que contagia pasión, enseña con gracia y libera el movimiento.</p>
+                        <ul class="flex gap-4 items-center mt-auto">
+                            <li><a href="https://www.facebook.com/" aria-label="Facebook de Gab Pérez" class="text-gray-400 hover:text-verde transition-colors duration-200"><i class="fa-brands fa-square-facebook text-2xl"></i></a></li>
+                            <li><a href="#" aria-label="TikTok de Gab Pérez" class="text-gray-400 hover:text-verde transition-colors duration-200"><i class="fa-brands fa-tiktok text-2xl"></i></a></li>
+                            <li><a href="#" aria-label="Instagram de Gab Pérez" class="text-gray-400 hover:text-verde transition-colors duration-200"><i class="fa-brands fa-instagram text-2xl"></i></a></li>
                         </ul>
                     </div>
                 </div>
-                <div class="transition ease-in-out cardreveal md:row-span-3 md:row-start-4 bg-gray-800 flex hover:bg-gris">
-                    <div id="coach-card-3" class="min-w-1/3"></div>
-                    <div class="flex flex-col justify-center gap-3 p-8">
-                        <h3 class="transition ease-in-out text-xl uppercase text-white hover:text-verde font-bold">Ana Castillo</h3>
-                        <p class="text-verde uppercase font-medium">pilates</p>
-                        <p class="text-gray-300">Experta en pilates, guía de movimiento consciente, fortalece cuerpo y mente con precisión.</p>
-                        <ul class="flex gap-3">
-                            <li><a href="https://www.facebook.com/"><i class="fa-brands fa-square-facebook" style="color: #ffffff;"></i></a></li>
-                            <li><a href="#"><i class="fa-brands fa-tiktok" style="color: #ffffff;"></i></a></li>
-                            <li><a href="#"><i class="fa-brands fa-instagram" style="color: #ffffff;"></i></a></li>
+
+                <div class="transition-all duration-300 ease-in-out cardreveal bg-gray-800 rounded-xl shadow-lg overflow-hidden flex flex-col md:flex-row hover:shadow-2xl hover:transform hover:-translate-y-2">
+                    <div id="coach-card-3" class="w-full md:w-2/5 h-80 md:h-auto bg-gray-700 bg-cover bg-center"></div>
+                    <div class="p-6 flex flex-col flex-grow md:w-3/5">
+                        <h3 class="text-2xl uppercase text-white hover:text-verde font-bold mb-1 transition-colors duration-200">Ana Castillo</h3>
+                        <p class="text-verde uppercase font-semibold text-sm mb-3">Pilates</p>
+                        <p class="text-gray-300 text-base leading-relaxed mb-5 flex-grow">Experta en pilates, guía de movimiento consciente, fortalece cuerpo y mente con precisión.</p>
+                        <ul class="flex gap-4 items-center mt-auto">
+                            <li><a href="https://www.facebook.com/" aria-label="Facebook de Ana Castillo" class="text-gray-400 hover:text-verde transition-colors duration-200"><i class="fa-brands fa-square-facebook text-2xl"></i></a></li>
+                            <li><a href="#" aria-label="TikTok de Ana Castillo" class="text-gray-400 hover:text-verde transition-colors duration-200"><i class="fa-brands fa-tiktok text-2xl"></i></a></li>
+                            <li><a href="#" aria-label="Instagram de Ana Castillo" class="text-gray-400 hover:text-verde transition-colors duration-200"><i class="fa-brands fa-instagram text-2xl"></i></a></li>
                         </ul>
                     </div>
                 </div>
-                <div class="transition ease-in-out cardreveal md:row-span-3 md:col-start-2 md:row-start-5 bg-gray-800 flex hover:bg-gris">
-                    <div id="coach-card-4" class="min-w-1/3"></div>
-                    <div class="flex flex-col justify-center gap-3 p-8">
-                        <h3 class="transition ease-in-out text-xl uppercase text-white hover:text-verde font-bold">Sam Veliz</h3>
-                        <p class="text-verde uppercase font-medium">spinning</p>
-                        <p class="text-gray-300">Líder enérgica, guía de ritmo intenso, motiva al límite, transforma esfuerzo en logro.</p>
-                        <ul class="flex gap-3">
-                            <li><a href="https://www.facebook.com/"><i class="fa-brands fa-square-facebook" style="color: #ffffff;"></i></a></li>
-                            <li><a href="#"><i class="fa-brands fa-tiktok" style="color: #ffffff;"></i></a></li>
-                            <li><a href="#"><i class="fa-brands fa-instagram" style="color: #ffffff;"></i></a></li>
+
+                <div class="transition-all duration-300 ease-in-out cardreveal bg-gray-800 rounded-xl shadow-lg overflow-hidden flex flex-col md:flex-row hover:shadow-2xl hover:transform hover:-translate-y-2">
+                    <div id="coach-card-4" class="w-full md:w-2/5 h-80 md:h-auto bg-gray-700 bg-cover bg-center"></div>
+                    <div class="p-6 flex flex-col flex-grow md:w-3/5">
+                        <h3 class="text-2xl uppercase text-white hover:text-verde font-bold mb-1 transition-colors duration-200">Sam Veliz</h3>
+                        <p class="text-verde uppercase font-semibold text-sm mb-3">Spinning</p>
+                        <p class="text-gray-300 text-base leading-relaxed mb-5 flex-grow">Líder enérgica, guía de ritmo intenso, motiva al límite, transforma esfuerzo en logro.</p>
+                        <ul class="flex gap-4 items-center mt-auto">
+                            <li><a href="https://www.facebook.com/" aria-label="Facebook de Sam Veliz" class="text-gray-400 hover:text-verde transition-colors duration-200"><i class="fa-brands fa-square-facebook text-2xl"></i></a></li>
+                            <li><a href="#" aria-label="TikTok de Sam Veliz" class="text-gray-400 hover:text-verde transition-colors duration-200"><i class="fa-brands fa-tiktok text-2xl"></i></a></li>
+                            <li><a href="#" aria-label="Instagram de Sam Veliz" class="text-gray-400 hover:text-verde transition-colors duration-200"><i class="fa-brands fa-instagram text-2xl"></i></a></li>
                         </ul>
                     </div>
                 </div>
+
             </div>
         </div>
 
     </section>
+
 
     
 
